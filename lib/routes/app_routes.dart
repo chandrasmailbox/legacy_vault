@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import '../presentation/biometric_authentication_setup/biometric_authentication_setup.dart';
-import '../presentation/password_vault/password_vault.dart';
-import '../presentation/family_management/family_management.dart';
+
 import '../presentation/add_edit_password/add_edit_password.dart';
+import '../presentation/biometric_authentication_setup/biometric_authentication_setup.dart';
 import '../presentation/digital_will_setup/digital_will_setup.dart';
+import '../presentation/family_management/family_management.dart';
+import '../presentation/password_vault/password_vault.dart';
 
 class AppRoutes {
   // TODO: Add your routes here
