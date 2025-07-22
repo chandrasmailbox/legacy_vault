@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../core/app_export.dart';
 import './widgets/master_password_form_widget.dart';
 import './widgets/password_requirements_widget.dart';
 import './widgets/password_strength_widget.dart';

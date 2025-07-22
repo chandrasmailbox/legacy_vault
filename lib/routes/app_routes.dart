@@ -8,10 +8,12 @@ import '../presentation/inheritance_status_dashboard/inheritance_status_dashboar
 import '../presentation/master_password_setup/master_password_setup.dart';
 import '../presentation/password_vault/password_vault.dart';
 import '../presentation/security_settings/security_settings.dart';
+import '../presentation/splash_screen/splash_screen.dart';
 
 class AppRoutes {
   // TODO: Add your routes here
   static const String initial = '/';
+  static const String splashScreen = '/splash-screen';
   static const String biometricAuthenticationSetup =
       '/biometric-authentication-setup';
   static const String passwordVault = '/password-vault';
@@ -24,7 +26,8 @@ class AppRoutes {
   static const String securitySettings = '/security-settings';
 
   static Map<String, WidgetBuilder> routes = {
-    initial: (context) => const PasswordVault(),
+    initial: (context) => const SplashScreen(),
+    splashScreen: (context) => const SplashScreen(),
     biometricAuthenticationSetup: (context) =>
         const BiometricAuthenticationSetup(),
     passwordVault: (context) => const PasswordVault(),
