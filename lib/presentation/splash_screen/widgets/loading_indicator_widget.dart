@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-
 class LoadingIndicatorWidget extends StatefulWidget {
   final Animation<double> fadeAnimation;
 
-  const LoadingIndicatorWidget({
-    super.key,
-    required this.fadeAnimation,
-  });
+  const LoadingIndicatorWidget({super.key, required this.fadeAnimation});
 
   @override
   State<LoadingIndicatorWidget> createState() => _LoadingIndicatorWidgetState();
@@ -27,13 +23,9 @@ class _LoadingIndicatorWidgetState extends State<LoadingIndicatorWidget>
       vsync: this,
     );
 
-    _progressAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _progressController,
-      curve: Curves.easeInOut,
-    ));
+    _progressAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _progressController, curve: Curves.easeInOut),
+    );
 
     // Start progress animation with delay
     Future.delayed(const Duration(milliseconds: 500), () {
@@ -74,10 +66,7 @@ class _LoadingIndicatorWidgetState extends State<LoadingIndicatorWidget>
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(2),
                       gradient: const LinearGradient(
-                        colors: [
-                          Color(0xFF4A90E2),
-                          Color(0xFF63B8FF),
-                        ],
+                        colors: [Color(0xFF4A90E2), Color(0xFF63B8FF)],
                       ),
                     ),
                   ),

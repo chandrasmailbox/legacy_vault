@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../core/app_export.dart';
+import '../../theme/app_theme.dart';
+import '../../widgets/custom_icon_widget.dart';
 import './widgets/inheritance_settings_widget.dart';
 import './widgets/password_form_widget.dart';
 import './widgets/password_generator_bottom_sheet.dart';
@@ -37,7 +39,7 @@ class _AddEditPasswordState extends State<AddEditPassword> {
     'Social',
     'Work',
     'Personal',
-    'Other'
+    'Other',
   ];
   final List<String> _serviceNameSuggestions = [
     'Gmail',
@@ -53,7 +55,7 @@ class _AddEditPasswordState extends State<AddEditPassword> {
     'Dropbox',
     'Spotify',
     'PayPal',
-    'Bank of America'
+    'Bank of America',
   ];
 
   final List<Map<String, dynamic>> _familyMembers = [
@@ -65,7 +67,7 @@ class _AddEditPasswordState extends State<AddEditPassword> {
       "phone": "+1 (555) 123-4567",
       "isEmergencyContact": true,
       "avatar":
-          "https://cdn.pixabay.com/photo/2015/03/04/22/35/avatar-659652_640.png"
+          "https://cdn.pixabay.com/photo/2015/03/04/22/35/avatar-659652_640.png",
     },
     {
       "id": 2,
@@ -75,7 +77,7 @@ class _AddEditPasswordState extends State<AddEditPassword> {
       "phone": "+1 (555) 234-5678",
       "isEmergencyContact": false,
       "avatar":
-          "https://cdn.pixabay.com/photo/2015/03/04/22/35/avatar-659652_640.png"
+          "https://cdn.pixabay.com/photo/2015/03/04/22/35/avatar-659652_640.png",
     },
     {
       "id": 3,
@@ -85,8 +87,8 @@ class _AddEditPasswordState extends State<AddEditPassword> {
       "phone": "+1 (555) 345-6789",
       "isEmergencyContact": false,
       "avatar":
-          "https://cdn.pixabay.com/photo/2015/03/04/22/35/avatar-659652_640.png"
-    }
+          "https://cdn.pixabay.com/photo/2015/03/04/22/35/avatar-659652_640.png",
+    },
   ];
 
   @override
@@ -106,8 +108,9 @@ class _AddEditPasswordState extends State<AddEditPassword> {
       _notesController.text = data['notes'] ?? '';
       _selectedCategory = data['category'] ?? 'Personal';
       _includeInDigitalWill = data['includeInDigitalWill'] ?? false;
-      _selectedFamilyMembers =
-          List<String>.from(data['selectedFamilyMembers'] ?? []);
+      _selectedFamilyMembers = List<String>.from(
+        data['selectedFamilyMembers'] ?? [],
+      );
       _calculatePasswordStrength();
     }
   }
@@ -152,15 +155,16 @@ class _AddEditPasswordState extends State<AddEditPassword> {
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      builder: (context) => PasswordGeneratorBottomSheet(
-        onPasswordGenerated: (password) {
-          setState(() {
-            _passwordController.text = password;
-            _hasUnsavedChanges = true;
-          });
-          _calculatePasswordStrength();
-        },
-      ),
+      builder:
+          (context) => PasswordGeneratorBottomSheet(
+            onPasswordGenerated: (password) {
+              setState(() {
+                _passwordController.text = password;
+                _hasUnsavedChanges = true;
+              });
+              _calculatePasswordStrength();
+            },
+          ),
     );
   }
 
@@ -187,8 +191,9 @@ class _AddEditPasswordState extends State<AddEditPassword> {
             widget.passwordData != null
                 ? 'Password updated successfully'
                 : 'Password saved successfully',
-            style: AppTheme.lightTheme.textTheme.bodyMedium
-                ?.copyWith(color: Colors.white),
+            style: AppTheme.lightTheme.textTheme.bodyMedium?.copyWith(
+              color: Colors.white,
+            ),
           ),
           backgroundColor: AppTheme.lightTheme.colorScheme.primary,
           behavior: SnackBarBehavior.floating,
@@ -205,29 +210,32 @@ class _AddEditPasswordState extends State<AddEditPassword> {
 
     final result = await showDialog<bool>(
       context: context,
-      builder: (context) => AlertDialog(
-        title: Text(
-          'Unsaved Changes',
-          style: AppTheme.lightTheme.textTheme.titleLarge,
-        ),
-        content: Text(
-          'You have unsaved changes. Are you sure you want to leave?',
-          style: AppTheme.lightTheme.textTheme.bodyMedium,
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(false),
-            child: Text('Cancel'),
-          ),
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(true),
-            child: Text(
-              'Leave',
-              style: TextStyle(color: AppTheme.lightTheme.colorScheme.error),
+      builder:
+          (context) => AlertDialog(
+            title: Text(
+              'Unsaved Changes',
+              style: AppTheme.lightTheme.textTheme.titleLarge,
             ),
+            content: Text(
+              'You have unsaved changes. Are you sure you want to leave?',
+              style: AppTheme.lightTheme.textTheme.bodyMedium,
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(true),
+                child: Text(
+                  'Leave',
+                  style: TextStyle(
+                    color: AppTheme.lightTheme.colorScheme.error,
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
     );
 
     return result ?? false;
@@ -340,27 +348,29 @@ class _AddEditPasswordState extends State<AddEditPassword> {
                 SizedBox(
                   width: double.infinity,
                   child: OutlinedButton.icon(
-                    onPressed: _serviceNameController.text.isNotEmpty &&
-                            _usernameController.text.isNotEmpty &&
-                            _passwordController.text.isNotEmpty
-                        ? () {
-                            HapticFeedback.lightImpact();
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text('Testing login credentials...'),
-                                duration: Duration(seconds: 2),
-                              ),
-                            );
-                          }
-                        : null,
+                    onPressed:
+                        _serviceNameController.text.isNotEmpty &&
+                                _usernameController.text.isNotEmpty &&
+                                _passwordController.text.isNotEmpty
+                            ? () {
+                              HapticFeedback.lightImpact();
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('Testing login credentials...'),
+                                  duration: Duration(seconds: 2),
+                                ),
+                              );
+                            }
+                            : null,
                     icon: CustomIconWidget(
                       iconName: 'verified_user',
-                      color: _serviceNameController.text.isNotEmpty &&
-                              _usernameController.text.isNotEmpty &&
-                              _passwordController.text.isNotEmpty
-                          ? AppTheme.lightTheme.colorScheme.primary
-                          : AppTheme.lightTheme.colorScheme.onSurface
-                              .withValues(alpha: 0.4),
+                      color:
+                          _serviceNameController.text.isNotEmpty &&
+                                  _usernameController.text.isNotEmpty &&
+                                  _passwordController.text.isNotEmpty
+                              ? AppTheme.lightTheme.colorScheme.primary
+                              : AppTheme.lightTheme.colorScheme.onSurface
+                                  .withValues(alpha: 0.4),
                       size: 20,
                     ),
                     label: Text('Test Login'),

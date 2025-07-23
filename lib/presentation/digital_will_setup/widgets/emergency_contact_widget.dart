@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../theme/app_theme.dart';
+import '../../../widgets/custom_icon_widget.dart';
 
 class EmergencyContactWidget extends StatelessWidget {
   final List<Map<String, dynamic>> familyMembers;
@@ -64,162 +66,188 @@ class EmergencyContactWidget extends StatelessWidget {
           // Emergency contact selection
           familyMembers.isEmpty
               ? Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.all(4.w),
-                  decoration: BoxDecoration(
-                    color: AppTheme.lightTheme.colorScheme.errorContainer
-                        .withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(
-                      color: AppTheme.errorLight.withValues(alpha: 0.3),
+                width: double.infinity,
+                padding: EdgeInsets.all(4.w),
+                decoration: BoxDecoration(
+                  color: AppTheme.lightTheme.colorScheme.errorContainer
+                      .withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(
+                    color: AppTheme.errorLight.withValues(alpha: 0.3),
+                  ),
+                ),
+                child: Column(
+                  children: [
+                    CustomIconWidget(
+                      iconName: 'warning',
+                      color: AppTheme.errorLight,
+                      size: 32,
                     ),
-                  ),
-                  child: Column(
-                    children: [
-                      CustomIconWidget(
-                        iconName: 'warning',
-                        color: AppTheme.errorLight,
-                        size: 32,
+                    SizedBox(height: 1.h),
+                    Text(
+                      'No family members available',
+                      style: AppTheme.lightTheme.textTheme.bodyMedium?.copyWith(
+                        fontWeight: FontWeight.w500,
                       ),
-                      SizedBox(height: 1.h),
-                      Text(
-                        'No family members available',
-                        style:
-                            AppTheme.lightTheme.textTheme.bodyMedium?.copyWith(
-                          fontWeight: FontWeight.w500,
-                        ),
+                    ),
+                    Text(
+                      'Add family members first to select an emergency contact',
+                      style: AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
+                        color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
                       ),
-                      Text(
-                        'Add family members first to select an emergency contact',
-                        style:
-                            AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
-                          color:
-                              AppTheme.lightTheme.colorScheme.onSurfaceVariant,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-                  ),
-                )
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              )
               : Column(
-                  children: familyMembers.map((member) {
-                    final isSelected = selectedContactId == member["id"];
+                children:
+                    familyMembers.map((member) {
+                      final isSelected = selectedContactId == member["id"];
 
-                    return Container(
-                      margin: EdgeInsets.only(bottom: 2.h),
-                      child: InkWell(
-                        onTap: () => onContactSelected(member["id"] as String),
-                        borderRadius: BorderRadius.circular(8),
-                        child: Container(
-                          width: double.infinity,
-                          padding: EdgeInsets.all(3.w),
-                          decoration: BoxDecoration(
-                            color: isSelected
-                                ? AppTheme.warningLight.withValues(alpha: 0.1)
-                                : Colors.transparent,
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(
-                              color: isSelected
-                                  ? AppTheme.warningLight
-                                  : AppTheme.lightTheme.colorScheme.outline
-                                      .withValues(alpha: 0.3),
-                              width: isSelected ? 2 : 1,
-                            ),
-                          ),
-                          child: Row(
-                            children: [
-                              // Radio button
-                              Container(
-                                width: 5.w,
-                                height: 5.w,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  border: Border.all(
-                                    color: isSelected
+                      return Container(
+                        margin: EdgeInsets.only(bottom: 2.h),
+                        child: InkWell(
+                          onTap:
+                              () => onContactSelected(member["id"] as String),
+                          borderRadius: BorderRadius.circular(8),
+                          child: Container(
+                            width: double.infinity,
+                            padding: EdgeInsets.all(3.w),
+                            decoration: BoxDecoration(
+                              color:
+                                  isSelected
+                                      ? AppTheme.warningLight.withValues(
+                                        alpha: 0.1,
+                                      )
+                                      : Colors.transparent,
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                color:
+                                    isSelected
                                         ? AppTheme.warningLight
                                         : AppTheme
-                                            .lightTheme.colorScheme.outline,
-                                    width: 2,
-                                  ),
-                                  color: isSelected
-                                      ? AppTheme.warningLight
-                                      : Colors.transparent,
-                                ),
-                                child: isSelected
-                                    ? Center(
-                                        child: Container(
-                                          width: 2.w,
-                                          height: 2.w,
-                                          decoration: const BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                      )
-                                    : null,
+                                            .lightTheme
+                                            .colorScheme
+                                            .outline
+                                            .withValues(alpha: 0.3),
+                                width: isSelected ? 2 : 1,
                               ),
-
-                              SizedBox(width: 4.w),
-
-                              // Member info
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      member["name"] as String,
-                                      style: AppTheme
-                                          .lightTheme.textTheme.bodyLarge
-                                          ?.copyWith(
-                                        fontWeight: FontWeight.w500,
-                                        color: isSelected
-                                            ? AppTheme.warningLight
-                                            : AppTheme.lightTheme.colorScheme
-                                                .onSurface,
-                                      ),
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                    Text(
-                                      '${member["relationship"]} • ${member["email"]}',
-                                      style: AppTheme
-                                          .lightTheme.textTheme.bodySmall
-                                          ?.copyWith(
-                                        color: AppTheme.lightTheme.colorScheme
-                                            .onSurfaceVariant,
-                                      ),
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ],
-                                ),
-                              ),
-
-                              // Emergency badge
-                              if (isSelected)
+                            ),
+                            child: Row(
+                              children: [
+                                // Radio button
                                 Container(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 2.w, vertical: 0.5.h),
+                                  width: 5.w,
+                                  height: 5.w,
                                   decoration: BoxDecoration(
-                                    color: AppTheme.warningLight,
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  child: Text(
-                                    'EMERGENCY',
-                                    style: AppTheme
-                                        .lightTheme.textTheme.labelSmall
-                                        ?.copyWith(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 10.sp,
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                      color:
+                                          isSelected
+                                              ? AppTheme.warningLight
+                                              : AppTheme
+                                                  .lightTheme
+                                                  .colorScheme
+                                                  .outline,
+                                      width: 2,
                                     ),
+                                    color:
+                                        isSelected
+                                            ? AppTheme.warningLight
+                                            : Colors.transparent,
+                                  ),
+                                  child:
+                                      isSelected
+                                          ? Center(
+                                            child: Container(
+                                              width: 2.w,
+                                              height: 2.w,
+                                              decoration: const BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          )
+                                          : null,
+                                ),
+
+                                SizedBox(width: 4.w),
+
+                                // Member info
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        member["name"] as String,
+                                        style: AppTheme
+                                            .lightTheme
+                                            .textTheme
+                                            .bodyLarge
+                                            ?.copyWith(
+                                              fontWeight: FontWeight.w500,
+                                              color:
+                                                  isSelected
+                                                      ? AppTheme.warningLight
+                                                      : AppTheme
+                                                          .lightTheme
+                                                          .colorScheme
+                                                          .onSurface,
+                                            ),
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                      Text(
+                                        '${member["relationship"]} • ${member["email"]}',
+                                        style: AppTheme
+                                            .lightTheme
+                                            .textTheme
+                                            .bodySmall
+                                            ?.copyWith(
+                                              color:
+                                                  AppTheme
+                                                      .lightTheme
+                                                      .colorScheme
+                                                      .onSurfaceVariant,
+                                            ),
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ],
                                   ),
                                 ),
-                            ],
+
+                                // Emergency badge
+                                if (isSelected)
+                                  Container(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 2.w,
+                                      vertical: 0.5.h,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: AppTheme.warningLight,
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    child: Text(
+                                      'EMERGENCY',
+                                      style: AppTheme
+                                          .lightTheme
+                                          .textTheme
+                                          .labelSmall
+                                          ?.copyWith(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 10.sp,
+                                          ),
+                                    ),
+                                  ),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    );
-                  }).toList(),
-                ),
+                      );
+                    }).toList(),
+              ),
 
           // Test notification button
           if (selectedContactId != null)
@@ -230,17 +258,18 @@ class EmergencyContactWidget extends StatelessWidget {
                   width: double.infinity,
                   child: OutlinedButton.icon(
                     onPressed: onTestNotification,
-                    style:
-                        AppTheme.lightTheme.outlinedButtonTheme.style?.copyWith(
-                      side: WidgetStateProperty.all(
-                        BorderSide(
-                          color: AppTheme.warningLight,
-                          width: 1.5,
+                    style: AppTheme.lightTheme.outlinedButtonTheme.style
+                        ?.copyWith(
+                          side: WidgetStateProperty.all(
+                            BorderSide(
+                              color: AppTheme.warningLight,
+                              width: 1.5,
+                            ),
+                          ),
+                          foregroundColor: WidgetStateProperty.all(
+                            AppTheme.warningLight,
+                          ),
                         ),
-                      ),
-                      foregroundColor:
-                          WidgetStateProperty.all(AppTheme.warningLight),
-                    ),
                     icon: CustomIconWidget(
                       iconName: 'send',
                       color: AppTheme.warningLight,
@@ -271,9 +300,7 @@ class EmergencyContactWidget extends StatelessWidget {
                           Text(
                             'Test Notification',
                             style: AppTheme.lightTheme.textTheme.labelMedium
-                                ?.copyWith(
-                              fontWeight: FontWeight.w600,
-                            ),
+                                ?.copyWith(fontWeight: FontWeight.w600),
                           ),
                         ],
                       ),

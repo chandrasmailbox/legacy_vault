@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-
 class SecurityAuditWidget extends StatefulWidget {
   final VoidCallback onRunAudit;
 
-  const SecurityAuditWidget({
-    Key? key,
-    required this.onRunAudit,
-  }) : super(key: key);
+  const SecurityAuditWidget({Key? key, required this.onRunAudit})
+    : super(key: key);
 
   @override
   State<SecurityAuditWidget> createState() => _SecurityAuditWidgetState();
@@ -50,8 +47,8 @@ class _SecurityAuditWidgetState extends State<SecurityAuditWidget> {
                 Text(
                   'Security Audit',
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ],
             ),
@@ -76,8 +73,8 @@ class _SecurityAuditWidgetState extends State<SecurityAuditWidget> {
                       Text(
                         'Last Security Scan',
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              fontWeight: FontWeight.w500,
-                            ),
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                       Text(
                         lastAuditDate != null
@@ -102,18 +99,19 @@ class _SecurityAuditWidgetState extends State<SecurityAuditWidget> {
               width: double.infinity,
               child: ElevatedButton.icon(
                 onPressed: isRunningAudit ? null : () => _runSecurityAudit(),
-                icon: isRunningAudit
-                    ? SizedBox(
-                        width: 16.sp,
-                        height: 16.sp,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2,
-                          valueColor: AlwaysStoppedAnimation<Color>(
-                            Theme.of(context).colorScheme.onPrimary,
+                icon:
+                    isRunningAudit
+                        ? SizedBox(
+                          width: 16.sp,
+                          height: 16.sp,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              Theme.of(context).colorScheme.onPrimary,
+                            ),
                           ),
-                        ),
-                      )
-                    : const Icon(Icons.search),
+                        )
+                        : const Icon(Icons.search),
                 label: Text(
                   isRunningAudit
                       ? 'Running Security Audit...'
@@ -128,10 +126,9 @@ class _SecurityAuditWidgetState extends State<SecurityAuditWidget> {
             Container(
               padding: EdgeInsets.all(3.w),
               decoration: BoxDecoration(
-                color: Theme.of(context)
-                    .colorScheme
-                    .primaryContainer
-                    .withAlpha(26),
+                color: Theme.of(
+                  context,
+                ).colorScheme.primaryContainer.withAlpha(26),
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(
                   color: Theme.of(context).colorScheme.primary.withAlpha(77),
@@ -151,9 +148,9 @@ class _SecurityAuditWidgetState extends State<SecurityAuditWidget> {
                       Text(
                         'What does the audit check?',
                         style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                              color: Theme.of(context).colorScheme.primary,
-                              fontWeight: FontWeight.w600,
-                            ),
+                          color: Theme.of(context).colorScheme.primary,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ],
                   ),
@@ -239,7 +236,11 @@ class _SecurityAuditWidgetState extends State<SecurityAuditWidget> {
   }
 
   Widget _buildResultTile(
-      BuildContext context, String label, String count, Color color) {
+    BuildContext context,
+    String label,
+    String count,
+    Color color,
+  ) {
     return Container(
       padding: EdgeInsets.all(2.w),
       decoration: BoxDecoration(
@@ -252,15 +253,15 @@ class _SecurityAuditWidgetState extends State<SecurityAuditWidget> {
           Text(
             count,
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: color,
-                ),
+              fontWeight: FontWeight.bold,
+              color: color,
+            ),
           ),
           Text(
             label,
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: color,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodySmall?.copyWith(color: color),
             textAlign: TextAlign.center,
           ),
         ],
@@ -269,7 +270,10 @@ class _SecurityAuditWidgetState extends State<SecurityAuditWidget> {
   }
 
   Widget _buildAuditCheckItem(
-      BuildContext context, String title, String description) {
+    BuildContext context,
+    String title,
+    String description,
+  ) {
     return Padding(
       padding: EdgeInsets.only(bottom: 1.w),
       child: Row(
@@ -287,19 +291,17 @@ class _SecurityAuditWidgetState extends State<SecurityAuditWidget> {
               children: [
                 Text(
                   title,
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        fontWeight: FontWeight.w500,
-                      ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w500),
                 ),
                 Text(
                   description,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Theme.of(context)
-                            .textTheme
-                            .bodySmall
-                            ?.color
-                            ?.withAlpha(179),
-                      ),
+                    color: Theme.of(
+                      context,
+                    ).textTheme.bodySmall?.color?.withAlpha(179),
+                  ),
                 ),
               ],
             ),
@@ -352,53 +354,67 @@ class _SecurityAuditWidgetState extends State<SecurityAuditWidget> {
   void _showAuditReport() {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Security Audit Report'),
-        content: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Audit completed on ${_formatDate(lastAuditDate!)}',
-                style: Theme.of(context).textTheme.bodySmall,
+      builder:
+          (context) => AlertDialog(
+            title: const Text('Security Audit Report'),
+            content: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Audit completed on ${_formatDate(lastAuditDate!)}',
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                  const SizedBox(height: 16),
+                  _buildReportItem(
+                    'Weak Passwords',
+                    auditResults['weakPasswords'],
+                  ),
+                  _buildReportItem(
+                    'Duplicate Passwords',
+                    auditResults['duplicatePasswords'],
+                  ),
+                  _buildReportItem(
+                    'Compromised Credentials',
+                    auditResults['compromisedCredentials'],
+                  ),
+                  _buildReportItem(
+                    'Expired Passwords',
+                    auditResults['expiredPasswords'],
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    'Recommendations:',
+                    style: Theme.of(context).textTheme.titleSmall,
+                  ),
+                  const SizedBox(height: 8),
+                  if (auditResults['weakPasswords'] > 0)
+                    const Text(
+                      '• Strengthen weak passwords using the password generator',
+                    ),
+                  if (auditResults['duplicatePasswords'] > 0)
+                    const Text(
+                      '• Update duplicate passwords with unique alternatives',
+                    ),
+                  if (auditResults['expiredPasswords'] > 0)
+                    const Text(
+                      '• Refresh expired passwords for better security',
+                    ),
+                  if (auditResults['weakPasswords'] == 0 &&
+                      auditResults['duplicatePasswords'] == 0 &&
+                      auditResults['expiredPasswords'] == 0)
+                    const Text('✅ All passwords meet security standards!'),
+                ],
               ),
-              const SizedBox(height: 16),
-              _buildReportItem('Weak Passwords', auditResults['weakPasswords']),
-              _buildReportItem(
-                  'Duplicate Passwords', auditResults['duplicatePasswords']),
-              _buildReportItem('Compromised Credentials',
-                  auditResults['compromisedCredentials']),
-              _buildReportItem(
-                  'Expired Passwords', auditResults['expiredPasswords']),
-              const SizedBox(height: 16),
-              Text(
-                'Recommendations:',
-                style: Theme.of(context).textTheme.titleSmall,
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('Close'),
               ),
-              const SizedBox(height: 8),
-              if (auditResults['weakPasswords'] > 0)
-                const Text(
-                    '• Strengthen weak passwords using the password generator'),
-              if (auditResults['duplicatePasswords'] > 0)
-                const Text(
-                    '• Update duplicate passwords with unique alternatives'),
-              if (auditResults['expiredPasswords'] > 0)
-                const Text('• Refresh expired passwords for better security'),
-              if (auditResults['weakPasswords'] == 0 &&
-                  auditResults['duplicatePasswords'] == 0 &&
-                  auditResults['expiredPasswords'] == 0)
-                const Text('✅ All passwords meet security standards!'),
             ],
           ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Close'),
-          ),
-        ],
-      ),
     );
   }
 

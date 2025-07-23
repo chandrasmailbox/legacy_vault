@@ -38,14 +38,16 @@ class CategoryFilterWidget extends StatelessWidget {
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
               decoration: BoxDecoration(
-                color: isSelected
-                    ? AppTheme.lightTheme.colorScheme.primary
-                    : AppTheme.lightTheme.colorScheme.surface,
+                color:
+                    isSelected
+                        ? AppTheme.lightTheme.colorScheme.primary
+                        : AppTheme.lightTheme.colorScheme.surface,
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(
-                  color: isSelected
-                      ? AppTheme.lightTheme.colorScheme.primary
-                      : AppTheme.lightTheme.colorScheme.outline,
+                  color:
+                      isSelected
+                          ? AppTheme.lightTheme.colorScheme.primary
+                          : AppTheme.lightTheme.colorScheme.outline,
                   width: 1,
                 ),
               ),
@@ -55,9 +57,10 @@ class CategoryFilterWidget extends StatelessWidget {
                   Text(
                     category,
                     style: AppTheme.lightTheme.textTheme.labelMedium?.copyWith(
-                      color: isSelected
-                          ? Colors.white
-                          : AppTheme.lightTheme.colorScheme.onSurface,
+                      color:
+                          isSelected
+                              ? Colors.white
+                              : AppTheme.lightTheme.colorScheme.onSurface,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -65,24 +68,28 @@ class CategoryFilterWidget extends StatelessWidget {
                     SizedBox(width: 1.w),
                     Container(
                       padding: EdgeInsets.symmetric(
-                          horizontal: 1.5.w, vertical: 0.2.h),
+                        horizontal: 1.5.w,
+                        vertical: 0.2.h,
+                      ),
                       decoration: BoxDecoration(
-                        color: isSelected
-                            ? Colors.white.withValues(alpha: 0.2)
-                            : AppTheme.lightTheme.colorScheme.primary
-                                .withValues(alpha: 0.1),
+                        color:
+                            isSelected
+                                ? Colors.white.withValues(alpha: 0.2)
+                                : AppTheme.lightTheme.colorScheme.primary
+                                    .withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Text(
                         count.toString(),
-                        style:
-                            AppTheme.lightTheme.textTheme.labelSmall?.copyWith(
-                          color: isSelected
-                              ? Colors.white
-                              : AppTheme.lightTheme.colorScheme.primary,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 8.sp,
-                        ),
+                        style: AppTheme.lightTheme.textTheme.labelSmall
+                            ?.copyWith(
+                              color:
+                                  isSelected
+                                      ? Colors.white
+                                      : AppTheme.lightTheme.colorScheme.primary,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 8.sp,
+                            ),
                       ),
                     ),
                   ],

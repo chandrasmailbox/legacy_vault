@@ -40,21 +40,13 @@ class _SplashScreenState extends State<SplashScreen>
       vsync: this,
     );
 
-    _fadeAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _fadeController,
-      curve: Curves.easeInOut,
-    ));
+    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _fadeController, curve: Curves.easeInOut),
+    );
 
-    _scaleAnimation = Tween<double>(
-      begin: 0.8,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _scaleController,
-      curve: Curves.elasticOut,
-    ));
+    _scaleAnimation = Tween<double>(begin: 0.8, end: 1.0).animate(
+      CurvedAnimation(parent: _scaleController, curve: Curves.elasticOut),
+    );
 
     _fadeController.forward();
     _scaleController.forward();
@@ -129,16 +121,12 @@ class _SplashScreenState extends State<SplashScreen>
                         SizedBox(height: 40.h),
 
                         // Loading Indicator
-                        LoadingIndicatorWidget(
-                          fadeAnimation: _fadeAnimation,
-                        ),
+                        LoadingIndicatorWidget(fadeAnimation: _fadeAnimation),
 
                         SizedBox(height: 24.h),
 
                         // Tagline
-                        TaglineWidget(
-                          fadeAnimation: _fadeAnimation,
-                        ),
+                        TaglineWidget(fadeAnimation: _fadeAnimation),
 
                         const Spacer(flex: 3),
                       ],

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../theme/app_theme.dart';
+import '../../../widgets/custom_icon_widget.dart';
 
 class ProofOfLifeWidget extends StatelessWidget {
   final Duration timeToNextCheckIn;
@@ -26,9 +28,10 @@ class ProofOfLifeWidget extends StatelessWidget {
         color: AppTheme.lightTheme.colorScheme.surface,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: _isOverdue
-              ? AppTheme.lightTheme.colorScheme.error
-              : _isUrgent
+          color:
+              _isOverdue
+                  ? AppTheme.lightTheme.colorScheme.error
+                  : _isUrgent
                   ? Colors.orange
                   : Colors.transparent,
           width: _isOverdue || _isUrgent ? 2 : 0,
@@ -41,9 +44,10 @@ class ProofOfLifeWidget extends StatelessWidget {
             children: [
               CustomIconWidget(
                 iconName: 'favorite',
-                color: _isOverdue
-                    ? AppTheme.lightTheme.colorScheme.error
-                    : _isUrgent
+                color:
+                    _isOverdue
+                        ? AppTheme.lightTheme.colorScheme.error
+                        : _isUrgent
                         ? Colors.orange
                         : AppTheme.lightTheme.colorScheme.primary,
                 size: 24,
@@ -58,12 +62,15 @@ class ProofOfLifeWidget extends StatelessWidget {
               if (_isUrgent || _isOverdue) ...[
                 const Spacer(),
                 Container(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 2.w, vertical: 0.5.h),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 2.w,
+                    vertical: 0.5.h,
+                  ),
                   decoration: BoxDecoration(
-                    color: _isOverdue
-                        ? AppTheme.lightTheme.colorScheme.error
-                        : Colors.orange,
+                    color:
+                        _isOverdue
+                            ? AppTheme.lightTheme.colorScheme.error
+                            : Colors.orange,
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: Text(
@@ -82,8 +89,8 @@ class ProofOfLifeWidget extends StatelessWidget {
             _isOverdue
                 ? 'Your check-in is overdue. Please confirm you are well to prevent inheritance activation.'
                 : _isUrgent
-                    ? 'Check-in required soon. Please confirm you are well to maintain your digital legacy.'
-                    : 'Regular check-in helps ensure your digital assets remain secure until needed.',
+                ? 'Check-in required soon. Please confirm you are well to maintain your digital legacy.'
+                : 'Regular check-in helps ensure your digital assets remain secure until needed.',
             style: AppTheme.lightTheme.textTheme.bodyMedium?.copyWith(
               color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
             ),
@@ -101,9 +108,10 @@ class ProofOfLifeWidget extends StatelessWidget {
                   ),
                   label: const Text('Check In Now'),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: _isOverdue
-                        ? AppTheme.lightTheme.colorScheme.error
-                        : _isUrgent
+                    backgroundColor:
+                        _isOverdue
+                            ? AppTheme.lightTheme.colorScheme.error
+                            : _isUrgent
                             ? Colors.orange
                             : AppTheme.lightTheme.colorScheme.primary,
                     padding: EdgeInsets.symmetric(vertical: 1.5.h),
@@ -114,8 +122,10 @@ class ProofOfLifeWidget extends StatelessWidget {
               OutlinedButton(
                 onPressed: onEmergencyDelay,
                 style: OutlinedButton.styleFrom(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.5.h),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 3.w,
+                    vertical: 1.5.h,
+                  ),
                 ),
                 child: CustomIconWidget(
                   iconName: 'access_time',
@@ -140,9 +150,10 @@ class ProofOfLifeWidget extends StatelessWidget {
                 children: [
                   CustomIconWidget(
                     iconName: 'info',
-                    color: _isOverdue
-                        ? AppTheme.lightTheme.colorScheme.error
-                        : Colors.orange,
+                    color:
+                        _isOverdue
+                            ? AppTheme.lightTheme.colorScheme.error
+                            : Colors.orange,
                     size: 16,
                   ),
                   SizedBox(width: 2.w),
@@ -152,9 +163,10 @@ class ProofOfLifeWidget extends StatelessWidget {
                           ? 'Missing check-ins will trigger your inheritance process'
                           : 'Check-in within 24 hours to prevent inheritance warnings',
                       style: AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
-                        color: _isOverdue
-                            ? AppTheme.lightTheme.colorScheme.error
-                            : Colors.orange,
+                        color:
+                            _isOverdue
+                                ? AppTheme.lightTheme.colorScheme.error
+                                : Colors.orange,
                       ),
                     ),
                   ),

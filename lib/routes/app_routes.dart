@@ -9,6 +9,7 @@ import '../presentation/master_password_setup/master_password_setup.dart';
 import '../presentation/password_vault/password_vault.dart';
 import '../presentation/security_settings/security_settings.dart';
 import '../presentation/splash_screen/splash_screen.dart';
+import '../presentation/sync_status/sync_status_screen.dart';
 
 class AppRoutes {
   // TODO: Add your routes here
@@ -24,12 +25,13 @@ class AppRoutes {
   static const String inheritanceStatusDashboard =
       '/inheritance-status-dashboard';
   static const String securitySettings = '/security-settings';
+  static const String syncStatus = '/sync-status';
 
   static Map<String, WidgetBuilder> routes = {
     initial: (context) => const SplashScreen(),
     splashScreen: (context) => const SplashScreen(),
-    biometricAuthenticationSetup: (context) =>
-        const BiometricAuthenticationSetup(),
+    biometricAuthenticationSetup:
+        (context) => const BiometricAuthenticationSetup(),
     passwordVault: (context) => const PasswordVault(),
     familyManagement: (context) => const FamilyManagement(),
     addEditPassword: (context) => const AddEditPassword(),
@@ -37,6 +39,7 @@ class AppRoutes {
     masterPasswordSetup: (context) => MasterPasswordSetup(),
     inheritanceStatusDashboard: (context) => const InheritanceStatusDashboard(),
     securitySettings: (context) => SecuritySettings(),
+    syncStatus: (context) => const SyncStatusScreen(),
     // TODO: Add your other routes here
   };
 }

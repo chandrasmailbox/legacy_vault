@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../theme/app_theme.dart';
+import '../../../widgets/custom_icon_widget.dart';
 
 class PasswordCardWidget extends StatelessWidget {
   final Map<String, dynamic> entry;
@@ -58,8 +60,9 @@ class PasswordCardWidget extends StatelessWidget {
                   width: 12.w,
                   height: 12.w,
                   decoration: BoxDecoration(
-                    color: AppTheme.lightTheme.colorScheme.primary
-                        .withValues(alpha: 0.1),
+                    color: AppTheme.lightTheme.colorScheme.primary.withValues(
+                      alpha: 0.1,
+                    ),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Center(
@@ -84,9 +87,7 @@ class PasswordCardWidget extends StatelessWidget {
                             child: Text(
                               entry["serviceName"] as String,
                               style: AppTheme.lightTheme.textTheme.titleMedium
-                                  ?.copyWith(
-                                fontWeight: FontWeight.w600,
-                              ),
+                                  ?.copyWith(fontWeight: FontWeight.w600),
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
@@ -96,11 +97,14 @@ class PasswordCardWidget extends StatelessWidget {
                       SizedBox(height: 0.5.h),
                       Text(
                         entry["username"] as String,
-                        style:
-                            AppTheme.lightTheme.textTheme.bodyMedium?.copyWith(
-                          color:
-                              AppTheme.lightTheme.colorScheme.onSurfaceVariant,
-                        ),
+                        style: AppTheme.lightTheme.textTheme.bodyMedium
+                            ?.copyWith(
+                              color:
+                                  AppTheme
+                                      .lightTheme
+                                      .colorScheme
+                                      .onSurfaceVariant,
+                            ),
                         overflow: TextOverflow.ellipsis,
                       ),
                       SizedBox(height: 0.5.h),
@@ -108,8 +112,11 @@ class PasswordCardWidget extends StatelessWidget {
                         children: [
                           CustomIconWidget(
                             iconName: 'update',
-                            color: AppTheme
-                                .lightTheme.colorScheme.onSurfaceVariant,
+                            color:
+                                AppTheme
+                                    .lightTheme
+                                    .colorScheme
+                                    .onSurfaceVariant,
                             size: 12,
                           ),
                           SizedBox(width: 1.w),
@@ -170,10 +177,7 @@ class PasswordCardWidget extends StatelessWidget {
     return Container(
       width: 3.w,
       height: 3.w,
-      decoration: BoxDecoration(
-        color: indicatorColor,
-        shape: BoxShape.circle,
-      ),
+      decoration: BoxDecoration(color: indicatorColor, shape: BoxShape.circle),
     );
   }
 
@@ -181,9 +185,10 @@ class PasswordCardWidget extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(bottom: 2.h),
       decoration: BoxDecoration(
-        color: isLeft
-            ? AppTheme.lightTheme.colorScheme.primary
-            : AppTheme.lightTheme.colorScheme.error,
+        color:
+            isLeft
+                ? AppTheme.lightTheme.colorScheme.primary
+                : AppTheme.lightTheme.colorScheme.error,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Align(
@@ -218,74 +223,77 @@ class PasswordCardWidget extends StatelessWidget {
     showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
-      builder: (context) => Container(
-        decoration: BoxDecoration(
-          color: AppTheme.lightTheme.colorScheme.surface,
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // Handle bar
-            Container(
-              width: 12.w,
-              height: 0.5.h,
-              margin: EdgeInsets.symmetric(vertical: 1.h),
-              decoration: BoxDecoration(
-                color: AppTheme.lightTheme.colorScheme.onSurfaceVariant
-                    .withValues(alpha: 0.3),
-                borderRadius: BorderRadius.circular(2),
+      builder:
+          (context) => Container(
+            decoration: BoxDecoration(
+              color: AppTheme.lightTheme.colorScheme.surface,
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(20),
               ),
             ),
-
-            Padding(
-              padding: EdgeInsets.all(4.w),
-              child: Column(
-                children: [
-                  Text(
-                    'Quick Actions',
-                    style: AppTheme.lightTheme.textTheme.titleMedium,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Handle bar
+                Container(
+                  width: 12.w,
+                  height: 0.5.h,
+                  margin: EdgeInsets.symmetric(vertical: 1.h),
+                  decoration: BoxDecoration(
+                    color: AppTheme.lightTheme.colorScheme.onSurfaceVariant
+                        .withValues(alpha: 0.3),
+                    borderRadius: BorderRadius.circular(2),
                   ),
-                  SizedBox(height: 2.h),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                ),
+
+                Padding(
+                  padding: EdgeInsets.all(4.w),
+                  child: Column(
                     children: [
-                      _buildQuickActionButton(
-                        context,
-                        icon: 'content_copy',
-                        label: 'Copy Password',
-                        onTap: () {
-                          Navigator.pop(context);
-                          onCopyPassword();
-                        },
+                      Text(
+                        'Quick Actions',
+                        style: AppTheme.lightTheme.textTheme.titleMedium,
                       ),
-                      _buildQuickActionButton(
-                        context,
-                        icon: 'edit',
-                        label: 'Edit',
-                        onTap: () {
-                          Navigator.pop(context);
-                          onEdit();
-                        },
+                      SizedBox(height: 2.h),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          _buildQuickActionButton(
+                            context,
+                            icon: 'content_copy',
+                            label: 'Copy Password',
+                            onTap: () {
+                              Navigator.pop(context);
+                              onCopyPassword();
+                            },
+                          ),
+                          _buildQuickActionButton(
+                            context,
+                            icon: 'edit',
+                            label: 'Edit',
+                            onTap: () {
+                              Navigator.pop(context);
+                              onEdit();
+                            },
+                          ),
+                          _buildQuickActionButton(
+                            context,
+                            icon: 'share',
+                            label: 'Share',
+                            onTap: () {
+                              Navigator.pop(context);
+                              // Handle share action
+                            },
+                          ),
+                        ],
                       ),
-                      _buildQuickActionButton(
-                        context,
-                        icon: 'share',
-                        label: 'Share',
-                        onTap: () {
-                          Navigator.pop(context);
-                          // Handle share action
-                        },
-                      ),
+                      SizedBox(height: 3.h),
                     ],
                   ),
-                  SizedBox(height: 3.h),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),
     );
   }
 
@@ -303,8 +311,9 @@ class PasswordCardWidget extends StatelessWidget {
             width: 15.w,
             height: 15.w,
             decoration: BoxDecoration(
-              color: AppTheme.lightTheme.colorScheme.primary
-                  .withValues(alpha: 0.1),
+              color: AppTheme.lightTheme.colorScheme.primary.withValues(
+                alpha: 0.1,
+              ),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Center(
@@ -316,10 +325,7 @@ class PasswordCardWidget extends StatelessWidget {
             ),
           ),
           SizedBox(height: 1.h),
-          Text(
-            label,
-            style: AppTheme.lightTheme.textTheme.bodySmall,
-          ),
+          Text(label, style: AppTheme.lightTheme.textTheme.bodySmall),
         ],
       ),
     );
@@ -329,100 +335,105 @@ class PasswordCardWidget extends StatelessWidget {
     showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
-      builder: (context) => Container(
-        decoration: BoxDecoration(
-          color: AppTheme.lightTheme.colorScheme.surface,
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // Handle bar
-            Container(
-              width: 12.w,
-              height: 0.5.h,
-              margin: EdgeInsets.symmetric(vertical: 1.h),
-              decoration: BoxDecoration(
-                color: AppTheme.lightTheme.colorScheme.onSurfaceVariant
-                    .withValues(alpha: 0.3),
-                borderRadius: BorderRadius.circular(2),
+      builder:
+          (context) => Container(
+            decoration: BoxDecoration(
+              color: AppTheme.lightTheme.colorScheme.surface,
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(20),
               ),
             ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Handle bar
+                Container(
+                  width: 12.w,
+                  height: 0.5.h,
+                  margin: EdgeInsets.symmetric(vertical: 1.h),
+                  decoration: BoxDecoration(
+                    color: AppTheme.lightTheme.colorScheme.onSurfaceVariant
+                        .withValues(alpha: 0.3),
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
 
-            ListTile(
-              leading: CustomIconWidget(
-                iconName: 'visibility',
-                color: AppTheme.lightTheme.colorScheme.primary,
-                size: 24,
-              ),
-              title: const Text('View Details'),
-              onTap: () {
-                Navigator.pop(context);
-                onTap();
-              },
+                ListTile(
+                  leading: CustomIconWidget(
+                    iconName: 'visibility',
+                    color: AppTheme.lightTheme.colorScheme.primary,
+                    size: 24,
+                  ),
+                  title: const Text('View Details'),
+                  onTap: () {
+                    Navigator.pop(context);
+                    onTap();
+                  },
+                ),
+
+                ListTile(
+                  leading: CustomIconWidget(
+                    iconName: 'content_copy',
+                    color: AppTheme.lightTheme.colorScheme.primary,
+                    size: 24,
+                  ),
+                  title: const Text('Copy Password'),
+                  onTap: () {
+                    Navigator.pop(context);
+                    onCopyPassword();
+                  },
+                ),
+
+                ListTile(
+                  leading: CustomIconWidget(
+                    iconName: 'person',
+                    color: AppTheme.lightTheme.colorScheme.primary,
+                    size: 24,
+                  ),
+                  title: const Text('Copy Username'),
+                  onTap: () {
+                    Navigator.pop(context);
+                    onCopyUsername();
+                  },
+                ),
+
+                ListTile(
+                  leading: CustomIconWidget(
+                    iconName: 'refresh',
+                    color: AppTheme.lightTheme.colorScheme.primary,
+                    size: 24,
+                  ),
+                  title: const Text('Generate New Password'),
+                  onTap: () {
+                    Navigator.pop(context);
+                    // Handle generate new password
+                  },
+                ),
+
+                const Divider(),
+
+                ListTile(
+                  leading: CustomIconWidget(
+                    iconName: 'delete',
+                    color: AppTheme.lightTheme.colorScheme.error,
+                    size: 24,
+                  ),
+                  title: Text(
+                    'Delete',
+                    style: TextStyle(
+                      color: AppTheme.lightTheme.colorScheme.error,
+                    ),
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                    onDelete();
+                  },
+                ),
+
+                SizedBox(height: 2.h),
+              ],
             ),
-
-            ListTile(
-              leading: CustomIconWidget(
-                iconName: 'content_copy',
-                color: AppTheme.lightTheme.colorScheme.primary,
-                size: 24,
-              ),
-              title: const Text('Copy Password'),
-              onTap: () {
-                Navigator.pop(context);
-                onCopyPassword();
-              },
-            ),
-
-            ListTile(
-              leading: CustomIconWidget(
-                iconName: 'person',
-                color: AppTheme.lightTheme.colorScheme.primary,
-                size: 24,
-              ),
-              title: const Text('Copy Username'),
-              onTap: () {
-                Navigator.pop(context);
-                onCopyUsername();
-              },
-            ),
-
-            ListTile(
-              leading: CustomIconWidget(
-                iconName: 'refresh',
-                color: AppTheme.lightTheme.colorScheme.primary,
-                size: 24,
-              ),
-              title: const Text('Generate New Password'),
-              onTap: () {
-                Navigator.pop(context);
-                // Handle generate new password
-              },
-            ),
-
-            const Divider(),
-
-            ListTile(
-              leading: CustomIconWidget(
-                iconName: 'delete',
-                color: AppTheme.lightTheme.colorScheme.error,
-                size: 24,
-              ),
-              title: Text(
-                'Delete',
-                style: TextStyle(color: AppTheme.lightTheme.colorScheme.error),
-              ),
-              onTap: () {
-                Navigator.pop(context);
-                onDelete();
-              },
-            ),
-
-            SizedBox(height: 2.h),
-          ],
-        ),
-      ),
+          ),
     );
   }
 }

@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-
 class PasswordRequirementsWidget extends StatelessWidget {
   final String password;
 
-  const PasswordRequirementsWidget({
-    Key? key,
-    required this.password,
-  }) : super(key: key);
+  const PasswordRequirementsWidget({Key? key, required this.password})
+    : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +17,9 @@ class PasswordRequirementsWidget extends StatelessWidget {
           children: [
             Text(
               'Password Requirements',
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w600,
-                  ),
+              style: Theme.of(
+                context,
+              ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
             ),
             SizedBox(height: 3.w),
             _buildRequirement(
@@ -56,9 +53,9 @@ class PasswordRequirementsWidget extends StatelessWidget {
             Text(
               'Recommended',
               style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    fontWeight: FontWeight.w600,
-                    color: Theme.of(context).colorScheme.secondary,
-                  ),
+                fontWeight: FontWeight.w600,
+                color: Theme.of(context).colorScheme.secondary,
+              ),
             ),
             SizedBox(height: 2.w),
             _buildRequirement(
@@ -95,34 +92,31 @@ class PasswordRequirementsWidget extends StatelessWidget {
     bool isMet, {
     bool isRecommended = false,
   }) {
-    final Color color = isMet
-        ? (isRecommended
-            ? Theme.of(context).colorScheme.secondary
-            : Theme.of(context).colorScheme.primary)
-        : Theme.of(context).colorScheme.outline;
+    final Color color =
+        isMet
+            ? (isRecommended
+                ? Theme.of(context).colorScheme.secondary
+                : Theme.of(context).colorScheme.primary)
+            : Theme.of(context).colorScheme.outline;
 
-    final IconData icon = isMet
-        ? Icons.check_circle
-        : (isRecommended ? Icons.circle_outlined : Icons.cancel_outlined);
+    final IconData icon =
+        isMet
+            ? Icons.check_circle
+            : (isRecommended ? Icons.circle_outlined : Icons.cancel_outlined);
 
     return Padding(
       padding: EdgeInsets.only(bottom: 2.w),
       child: Row(
         children: [
-          Icon(
-            icon,
-            size: 16.sp,
-            color: color,
-          ),
+          Icon(icon, size: 16.sp, color: color),
           SizedBox(width: 3.w),
           Expanded(
             child: Text(
               requirement,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color:
-                        isMet ? color : Theme.of(context).colorScheme.onSurface,
-                    decoration: isMet ? TextDecoration.none : null,
-                  ),
+                color: isMet ? color : Theme.of(context).colorScheme.onSurface,
+                decoration: isMet ? TextDecoration.none : null,
+              ),
             ),
           ),
         ],

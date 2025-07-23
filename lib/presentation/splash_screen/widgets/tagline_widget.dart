@@ -2,14 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 
-
 class TaglineWidget extends StatefulWidget {
   final Animation<double> fadeAnimation;
 
-  const TaglineWidget({
-    super.key,
-    required this.fadeAnimation,
-  });
+  const TaglineWidget({super.key, required this.fadeAnimation});
 
   @override
   State<TaglineWidget> createState() => _TaglineWidgetState();
@@ -31,10 +27,9 @@ class _TaglineWidgetState extends State<TaglineWidget>
     _slideAnimation = Tween<Offset>(
       begin: const Offset(0, 0.5),
       end: Offset.zero,
-    ).animate(CurvedAnimation(
-      parent: _slideController,
-      curve: Curves.easeOutQuart,
-    ));
+    ).animate(
+      CurvedAnimation(parent: _slideController, curve: Curves.easeOutQuart),
+    );
 
     // Start slide animation with delay
     Future.delayed(const Duration(milliseconds: 1200), () {

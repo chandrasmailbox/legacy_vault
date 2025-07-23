@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../theme/app_theme.dart';
+import '../../../widgets/custom_icon_widget.dart';
 
 class SecurityInfoWidget extends StatelessWidget {
   const SecurityInfoWidget({Key? key}) : super(key: key);
@@ -51,8 +53,9 @@ class SecurityInfoWidget extends StatelessWidget {
             width: double.infinity,
             padding: EdgeInsets.all(3.w),
             decoration: BoxDecoration(
-              color: AppTheme.lightTheme.colorScheme.primary
-                  .withValues(alpha: 0.05),
+              color: AppTheme.lightTheme.colorScheme.primary.withValues(
+                alpha: 0.05,
+              ),
               borderRadius: BorderRadius.circular(6),
             ),
             child: Column(
@@ -69,8 +72,9 @@ class SecurityInfoWidget extends StatelessWidget {
                   'Uses your device\'s secure hardware (iOS Secure Enclave / Android Keystore) for biometric data processing. No biometric information is ever stored or transmitted by Legacy Vault.',
                   style: AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
                     height: 1.4,
-                    color: AppTheme.lightTheme.colorScheme.onSurface
-                        .withValues(alpha: 0.7),
+                    color: AppTheme.lightTheme.colorScheme.onSurface.withValues(
+                      alpha: 0.7,
+                    ),
                   ),
                 ),
               ],
@@ -85,19 +89,19 @@ class SecurityInfoWidget extends StatelessWidget {
     return [
       {
         'icon': 'lock',
-        'text': 'Biometric data stays on your device and never leaves it'
+        'text': 'Biometric data stays on your device and never leaves it',
       },
       {
         'icon': 'offline_pin',
-        'text': 'Works completely offline - no cloud dependency'
+        'text': 'Works completely offline - no cloud dependency',
       },
       {
         'icon': 'key',
-        'text': 'Master password remains your primary access method'
+        'text': 'Master password remains your primary access method',
       },
       {
         'icon': 'family_restroom',
-        'text': 'Inheritance process works regardless of biometric settings'
+        'text': 'Inheritance process works regardless of biometric settings',
       },
     ];
   }
@@ -112,8 +116,9 @@ class SecurityInfoWidget extends StatelessWidget {
             margin: EdgeInsets.only(top: 0.2.h),
             child: CustomIconWidget(
               iconName: point['icon']!,
-              color: AppTheme.lightTheme.colorScheme.primary
-                  .withValues(alpha: 0.7),
+              color: AppTheme.lightTheme.colorScheme.primary.withValues(
+                alpha: 0.7,
+              ),
               size: 16,
             ),
           ),
@@ -123,8 +128,9 @@ class SecurityInfoWidget extends StatelessWidget {
               point['text']!,
               style: AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
                 height: 1.4,
-                color: AppTheme.lightTheme.colorScheme.onSurface
-                    .withValues(alpha: 0.8),
+                color: AppTheme.lightTheme.colorScheme.onSurface.withValues(
+                  alpha: 0.8,
+                ),
               ),
             ),
           ),

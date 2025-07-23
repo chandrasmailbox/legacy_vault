@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../core/app_export.dart';
+import '../../theme/app_theme.dart';
+import '../../widgets/custom_icon_widget.dart';
 import './widgets/biometric_explanation_widget.dart';
 import './widgets/biometric_icon_widget.dart';
 import './widgets/security_info_widget.dart';
@@ -15,7 +17,8 @@ class BiometricAuthenticationSetup extends StatefulWidget {
 }
 
 class _BiometricAuthenticationSetupState
-    extends State<BiometricAuthenticationSetup> with TickerProviderStateMixin {
+    extends State<BiometricAuthenticationSetup>
+    with TickerProviderStateMixin {
   late AnimationController _iconAnimationController;
   late AnimationController _checkmarkAnimationController;
   late Animation<double> _iconAnimation;
@@ -45,21 +48,19 @@ class _BiometricAuthenticationSetupState
       vsync: this,
     );
 
-    _iconAnimation = Tween<double>(
-      begin: 0.8,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _iconAnimationController,
-      curve: Curves.easeInOut,
-    ));
+    _iconAnimation = Tween<double>(begin: 0.8, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _iconAnimationController,
+        curve: Curves.easeInOut,
+      ),
+    );
 
-    _checkmarkAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _checkmarkAnimationController,
-      curve: Curves.elasticOut,
-    ));
+    _checkmarkAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _checkmarkAnimationController,
+        curve: Curves.elasticOut,
+      ),
+    );
 
     _iconAnimationController.repeat(reverse: true);
   }
@@ -199,12 +200,14 @@ class _BiometricAuthenticationSetupState
                   width: double.infinity,
                   padding: EdgeInsets.all(4.w),
                   decoration: BoxDecoration(
-                    color: AppTheme.lightTheme.colorScheme.error
-                        .withValues(alpha: 0.1),
+                    color: AppTheme.lightTheme.colorScheme.error.withValues(
+                      alpha: 0.1,
+                    ),
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(
-                      color: AppTheme.lightTheme.colorScheme.error
-                          .withValues(alpha: 0.3),
+                      color: AppTheme.lightTheme.colorScheme.error.withValues(
+                        alpha: 0.3,
+                      ),
                     ),
                   ),
                   child: Row(
@@ -220,8 +223,8 @@ class _BiometricAuthenticationSetupState
                           _errorMessage,
                           style: AppTheme.lightTheme.textTheme.bodyMedium
                               ?.copyWith(
-                            color: AppTheme.lightTheme.colorScheme.error,
-                          ),
+                                color: AppTheme.lightTheme.colorScheme.error,
+                              ),
                         ),
                       ),
                     ],
@@ -237,43 +240,52 @@ class _BiometricAuthenticationSetupState
                   width: double.infinity,
                   height: 6.h,
                   child: ElevatedButton(
-                    onPressed: _biometricAvailable && !_isLoading
-                        ? _enableBiometricAuthentication
-                        : null,
+                    onPressed:
+                        _biometricAvailable && !_isLoading
+                            ? _enableBiometricAuthentication
+                            : null,
                     style: AppTheme.lightTheme.elevatedButtonTheme.style,
-                    child: _isLoading
-                        ? SizedBox(
-                            height: 20,
-                            width: 20,
-                            child: CircularProgressIndicator(
-                              strokeWidth: 2,
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                AppTheme.lightTheme.colorScheme.onPrimary,
-                              ),
-                            ),
-                          )
-                        : Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              CustomIconWidget(
-                                iconName: _biometricType == 'face'
-                                    ? 'face'
-                                    : 'fingerprint',
-                                color:
-                                    AppTheme.lightTheme.colorScheme.onPrimary,
-                                size: 20,
-                              ),
-                              SizedBox(width: 2.w),
-                              Text(
-                                'Enable Biometric Authentication',
-                                style: AppTheme.lightTheme.textTheme.labelLarge
-                                    ?.copyWith(
-                                  color:
-                                      AppTheme.lightTheme.colorScheme.onPrimary,
+                    child:
+                        _isLoading
+                            ? SizedBox(
+                              height: 20,
+                              width: 20,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  AppTheme.lightTheme.colorScheme.onPrimary,
                                 ),
                               ),
-                            ],
-                          ),
+                            )
+                            : Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                CustomIconWidget(
+                                  iconName:
+                                      _biometricType == 'face'
+                                          ? 'face'
+                                          : 'fingerprint',
+                                  color:
+                                      AppTheme.lightTheme.colorScheme.onPrimary,
+                                  size: 20,
+                                ),
+                                SizedBox(width: 2.w),
+                                Text(
+                                  'Enable Biometric Authentication',
+                                  style: AppTheme
+                                      .lightTheme
+                                      .textTheme
+                                      .labelLarge
+                                      ?.copyWith(
+                                        color:
+                                            AppTheme
+                                                .lightTheme
+                                                .colorScheme
+                                                .onPrimary,
+                                      ),
+                                ),
+                              ],
+                            ),
                   ),
                 ),
 
@@ -303,11 +315,11 @@ class _BiometricAuthenticationSetupState
                     onPressed: _navigateToSettings,
                     child: Text(
                       'Open Device Settings',
-                      style:
-                          AppTheme.lightTheme.textTheme.labelMedium?.copyWith(
-                        color: AppTheme.lightTheme.colorScheme.primary,
-                        decoration: TextDecoration.underline,
-                      ),
+                      style: AppTheme.lightTheme.textTheme.labelMedium
+                          ?.copyWith(
+                            color: AppTheme.lightTheme.colorScheme.primary,
+                            decoration: TextDecoration.underline,
+                          ),
                     ),
                   ),
               ] else ...[
@@ -316,8 +328,11 @@ class _BiometricAuthenticationSetupState
                   width: double.infinity,
                   height: 6.h,
                   child: ElevatedButton(
-                    onPressed: () => Navigator.pushReplacementNamed(
-                        context, '/digital-will-setup'),
+                    onPressed:
+                        () => Navigator.pushReplacementNamed(
+                          context,
+                          '/digital-will-setup',
+                        ),
                     style: AppTheme.lightTheme.elevatedButtonTheme.style,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -326,8 +341,9 @@ class _BiometricAuthenticationSetupState
                           'Continue to Digital Will Setup',
                           style: AppTheme.lightTheme.textTheme.labelLarge
                               ?.copyWith(
-                            color: AppTheme.lightTheme.colorScheme.onPrimary,
-                          ),
+                                color:
+                                    AppTheme.lightTheme.colorScheme.onPrimary,
+                              ),
                         ),
                         SizedBox(width: 2.w),
                         CustomIconWidget(
@@ -351,8 +367,9 @@ class _BiometricAuthenticationSetupState
                   color: AppTheme.lightTheme.colorScheme.surface,
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(
-                    color: AppTheme.lightTheme.colorScheme.outline
-                        .withValues(alpha: 0.2),
+                    color: AppTheme.lightTheme.colorScheme.outline.withValues(
+                      alpha: 0.2,
+                    ),
                   ),
                 ),
                 child: Column(
@@ -369,9 +386,7 @@ class _BiometricAuthenticationSetupState
                         Text(
                           'Important Information',
                           style: AppTheme.lightTheme.textTheme.titleSmall
-                              ?.copyWith(
-                            fontWeight: FontWeight.w600,
-                          ),
+                              ?.copyWith(fontWeight: FontWeight.w600),
                         ),
                       ],
                     ),

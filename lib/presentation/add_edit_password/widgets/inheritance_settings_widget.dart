@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../theme/app_theme.dart';
+import '../../../widgets/custom_icon_widget.dart';
+import '../../../widgets/custom_image_widget.dart';
 
 class InheritanceSettingsWidget extends StatelessWidget {
   final bool includeInDigitalWill;
@@ -57,12 +60,14 @@ class InheritanceSettingsWidget extends StatelessWidget {
           Container(
             padding: EdgeInsets.all(4.w),
             decoration: BoxDecoration(
-              color: AppTheme.lightTheme.colorScheme.primary
-                  .withValues(alpha: 0.05),
+              color: AppTheme.lightTheme.colorScheme.primary.withValues(
+                alpha: 0.05,
+              ),
               borderRadius: BorderRadius.circular(8),
               border: Border.all(
-                color: AppTheme.lightTheme.colorScheme.primary
-                    .withValues(alpha: 0.2),
+                color: AppTheme.lightTheme.colorScheme.primary.withValues(
+                  alpha: 0.2,
+                ),
               ),
             ),
             child: Column(
@@ -77,18 +82,19 @@ class InheritanceSettingsWidget extends StatelessWidget {
                           Text(
                             'Include in Digital Will',
                             style: AppTheme.lightTheme.textTheme.titleMedium
-                                ?.copyWith(
-                              fontWeight: FontWeight.w600,
-                            ),
+                                ?.copyWith(fontWeight: FontWeight.w600),
                           ),
                           SizedBox(height: 1.h),
                           Text(
                             'Allow nominated family members to access this password after your passing',
                             style: AppTheme.lightTheme.textTheme.bodySmall
                                 ?.copyWith(
-                              color: AppTheme.lightTheme.colorScheme.onSurface
-                                  .withValues(alpha: 0.7),
-                            ),
+                                  color: AppTheme
+                                      .lightTheme
+                                      .colorScheme
+                                      .onSurface
+                                      .withValues(alpha: 0.7),
+                                ),
                           ),
                         ],
                       ),
@@ -116,8 +122,9 @@ class InheritanceSettingsWidget extends StatelessWidget {
             Text(
               'Choose which family members will have access to this password',
               style: AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
-                color: AppTheme.lightTheme.colorScheme.onSurface
-                    .withValues(alpha: 0.7),
+                color: AppTheme.lightTheme.colorScheme.onSurface.withValues(
+                  alpha: 0.7,
+                ),
               ),
             ),
             SizedBox(height: 3.h),
@@ -126,24 +133,28 @@ class InheritanceSettingsWidget extends StatelessWidget {
               return Container(
                 margin: EdgeInsets.only(bottom: 2.h),
                 decoration: BoxDecoration(
-                  color: isSelected
-                      ? AppTheme.lightTheme.colorScheme.primary
-                          .withValues(alpha: 0.05)
-                      : AppTheme.lightTheme.colorScheme.surface,
+                  color:
+                      isSelected
+                          ? AppTheme.lightTheme.colorScheme.primary.withValues(
+                            alpha: 0.05,
+                          )
+                          : AppTheme.lightTheme.colorScheme.surface,
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(
-                    color: isSelected
-                        ? AppTheme.lightTheme.colorScheme.primary
-                        : AppTheme.lightTheme.colorScheme.outline
-                            .withValues(alpha: 0.3),
+                    color:
+                        isSelected
+                            ? AppTheme.lightTheme.colorScheme.primary
+                            : AppTheme.lightTheme.colorScheme.outline
+                                .withValues(alpha: 0.3),
                     width: isSelected ? 2 : 1,
                   ),
                 ),
                 child: CheckboxListTile(
                   value: isSelected,
                   onChanged: (bool? value) {
-                    List<String> updatedMembers =
-                        List.from(selectedFamilyMembers);
+                    List<String> updatedMembers = List.from(
+                      selectedFamilyMembers,
+                    );
                     if (value == true) {
                       updatedMembers.add(member['name']);
                     } else {
@@ -162,20 +173,20 @@ class InheritanceSettingsWidget extends StatelessWidget {
                     children: [
                       Text(
                         member['relationship'],
-                        style:
-                            AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
-                          color: AppTheme.lightTheme.colorScheme.primary,
-                          fontWeight: FontWeight.w500,
-                        ),
+                        style: AppTheme.lightTheme.textTheme.bodySmall
+                            ?.copyWith(
+                              color: AppTheme.lightTheme.colorScheme.primary,
+                              fontWeight: FontWeight.w500,
+                            ),
                       ),
                       SizedBox(height: 0.5.h),
                       Text(
                         member['email'],
-                        style:
-                            AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
-                          color: AppTheme.lightTheme.colorScheme.onSurface
-                              .withValues(alpha: 0.7),
-                        ),
+                        style: AppTheme.lightTheme.textTheme.bodySmall
+                            ?.copyWith(
+                              color: AppTheme.lightTheme.colorScheme.onSurface
+                                  .withValues(alpha: 0.7),
+                            ),
                       ),
                     ],
                   ),
@@ -200,8 +211,10 @@ class InheritanceSettingsWidget extends StatelessWidget {
                     ),
                   ),
                   controlAffinity: ListTileControlAffinity.trailing,
-                  contentPadding:
-                      EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.h),
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: 3.w,
+                    vertical: 1.h,
+                  ),
                 ),
               );
             }).toList(),
@@ -210,12 +223,14 @@ class InheritanceSettingsWidget extends StatelessWidget {
               Container(
                 padding: EdgeInsets.all(3.w),
                 decoration: BoxDecoration(
-                  color: AppTheme.lightTheme.colorScheme.tertiary
-                      .withValues(alpha: 0.1),
+                  color: AppTheme.lightTheme.colorScheme.tertiary.withValues(
+                    alpha: 0.1,
+                  ),
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(
-                    color: AppTheme.lightTheme.colorScheme.tertiary
-                        .withValues(alpha: 0.3),
+                    color: AppTheme.lightTheme.colorScheme.tertiary.withValues(
+                      alpha: 0.3,
+                    ),
                   ),
                 ),
                 child: Row(
@@ -229,11 +244,11 @@ class InheritanceSettingsWidget extends StatelessWidget {
                     Expanded(
                       child: Text(
                         '${selectedFamilyMembers.length} family member(s) selected. They will receive access after inheritance activation.',
-                        style:
-                            AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
-                          color: AppTheme.lightTheme.colorScheme.onSurface
-                              .withValues(alpha: 0.8),
-                        ),
+                        style: AppTheme.lightTheme.textTheme.bodySmall
+                            ?.copyWith(
+                              color: AppTheme.lightTheme.colorScheme.onSurface
+                                  .withValues(alpha: 0.8),
+                            ),
                       ),
                     ),
                   ],

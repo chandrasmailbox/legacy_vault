@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../theme/app_theme.dart';
+import '../../../widgets/custom_icon_widget.dart';
 
 class InheritanceDelayWidget extends StatelessWidget {
   final int delayDays;
@@ -81,98 +83,128 @@ class InheritanceDelayWidget extends StatelessWidget {
 
           // Delay options
           Column(
-            children: _delayOptions.map((option) {
-              final isSelected = delayDays == option["days"];
+            children:
+                _delayOptions.map((option) {
+                  final isSelected = delayDays == option["days"];
 
-              return Container(
-                margin: EdgeInsets.only(bottom: 2.h),
-                child: InkWell(
-                  onTap: () => onDelayChanged(option["days"] as int),
-                  borderRadius: BorderRadius.circular(8),
-                  child: Container(
-                    width: double.infinity,
-                    padding: EdgeInsets.all(3.w),
-                    decoration: BoxDecoration(
-                      color: isSelected
-                          ? AppTheme.lightTheme.colorScheme.primary
-                              .withValues(alpha: 0.1)
-                          : Colors.transparent,
+                  return Container(
+                    margin: EdgeInsets.only(bottom: 2.h),
+                    child: InkWell(
+                      onTap: () => onDelayChanged(option["days"] as int),
                       borderRadius: BorderRadius.circular(8),
-                      border: Border.all(
-                        color: isSelected
-                            ? AppTheme.lightTheme.colorScheme.primary
-                            : AppTheme.lightTheme.colorScheme.outline
-                                .withValues(alpha: 0.3),
-                        width: isSelected ? 2 : 1,
+                      child: Container(
+                        width: double.infinity,
+                        padding: EdgeInsets.all(3.w),
+                        decoration: BoxDecoration(
+                          color:
+                              isSelected
+                                  ? AppTheme.lightTheme.colorScheme.primary
+                                      .withValues(alpha: 0.1)
+                                  : Colors.transparent,
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(
+                            color:
+                                isSelected
+                                    ? AppTheme.lightTheme.colorScheme.primary
+                                    : AppTheme.lightTheme.colorScheme.outline
+                                        .withValues(alpha: 0.3),
+                            width: isSelected ? 2 : 1,
+                          ),
+                        ),
+                        child: Row(
+                          children: [
+                            // Radio button
+                            Container(
+                              width: 5.w,
+                              height: 5.w,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color:
+                                      isSelected
+                                          ? AppTheme
+                                              .lightTheme
+                                              .colorScheme
+                                              .primary
+                                          : AppTheme
+                                              .lightTheme
+                                              .colorScheme
+                                              .outline,
+                                  width: 2,
+                                ),
+                                color:
+                                    isSelected
+                                        ? AppTheme
+                                            .lightTheme
+                                            .colorScheme
+                                            .primary
+                                        : Colors.transparent,
+                              ),
+                              child:
+                                  isSelected
+                                      ? Center(
+                                        child: Container(
+                                          width: 2.w,
+                                          height: 2.w,
+                                          decoration: const BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      )
+                                      : null,
+                            ),
+
+                            SizedBox(width: 4.w),
+
+                            // Label and description
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    option["label"] as String,
+                                    style: AppTheme
+                                        .lightTheme
+                                        .textTheme
+                                        .bodyLarge
+                                        ?.copyWith(
+                                          fontWeight: FontWeight.w500,
+                                          color:
+                                              isSelected
+                                                  ? AppTheme
+                                                      .lightTheme
+                                                      .colorScheme
+                                                      .primary
+                                                  : AppTheme
+                                                      .lightTheme
+                                                      .colorScheme
+                                                      .onSurface,
+                                        ),
+                                  ),
+                                  Text(
+                                    option["description"] as String,
+                                    style: AppTheme
+                                        .lightTheme
+                                        .textTheme
+                                        .bodySmall
+                                        ?.copyWith(
+                                          color:
+                                              AppTheme
+                                                  .lightTheme
+                                                  .colorScheme
+                                                  .onSurfaceVariant,
+                                        ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                    child: Row(
-                      children: [
-                        // Radio button
-                        Container(
-                          width: 5.w,
-                          height: 5.w,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              color: isSelected
-                                  ? AppTheme.lightTheme.colorScheme.primary
-                                  : AppTheme.lightTheme.colorScheme.outline,
-                              width: 2,
-                            ),
-                            color: isSelected
-                                ? AppTheme.lightTheme.colorScheme.primary
-                                : Colors.transparent,
-                          ),
-                          child: isSelected
-                              ? Center(
-                                  child: Container(
-                                    width: 2.w,
-                                    height: 2.w,
-                                    decoration: const BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                )
-                              : null,
-                        ),
-
-                        SizedBox(width: 4.w),
-
-                        // Label and description
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                option["label"] as String,
-                                style: AppTheme.lightTheme.textTheme.bodyLarge
-                                    ?.copyWith(
-                                  fontWeight: FontWeight.w500,
-                                  color: isSelected
-                                      ? AppTheme.lightTheme.colorScheme.primary
-                                      : AppTheme
-                                          .lightTheme.colorScheme.onSurface,
-                                ),
-                              ),
-                              Text(
-                                option["description"] as String,
-                                style: AppTheme.lightTheme.textTheme.bodySmall
-                                    ?.copyWith(
-                                  color: AppTheme
-                                      .lightTheme.colorScheme.onSurfaceVariant,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              );
-            }).toList(),
+                  );
+                }).toList(),
           ),
 
           SizedBox(height: 2.h),
@@ -198,10 +230,8 @@ class InheritanceDelayWidget extends StatelessWidget {
                     SizedBox(width: 2.w),
                     Text(
                       'Dead Man\'s Switch',
-                      style:
-                          AppTheme.lightTheme.textTheme.labelMedium?.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
+                      style: AppTheme.lightTheme.textTheme.labelMedium
+                          ?.copyWith(fontWeight: FontWeight.w600),
                     ),
                   ],
                 ),

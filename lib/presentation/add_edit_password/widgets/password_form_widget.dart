@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../theme/app_theme.dart';
+import '../../../widgets/custom_icon_widget.dart';
 
 class PasswordFormWidget extends StatelessWidget {
   final TextEditingController serviceNameController;
@@ -66,9 +68,9 @@ class PasswordFormWidget extends StatelessWidget {
               return const Iterable<String>.empty();
             }
             return serviceNameSuggestions.where((String option) {
-              return option
-                  .toLowerCase()
-                  .contains(textEditingValue.text.toLowerCase());
+              return option.toLowerCase().contains(
+                textEditingValue.text.toLowerCase(),
+              );
             });
           },
           onSelected: (String selection) {
@@ -89,8 +91,9 @@ class PasswordFormWidget extends StatelessWidget {
                   padding: EdgeInsets.all(3.w),
                   child: CustomIconWidget(
                     iconName: 'business',
-                    color: AppTheme.lightTheme.colorScheme.onSurface
-                        .withValues(alpha: 0.6),
+                    color: AppTheme.lightTheme.colorScheme.onSurface.withValues(
+                      alpha: 0.6,
+                    ),
                     size: 20,
                   ),
                 ),
@@ -123,8 +126,9 @@ class PasswordFormWidget extends StatelessWidget {
               padding: EdgeInsets.all(3.w),
               child: CustomIconWidget(
                 iconName: 'person',
-                color: AppTheme.lightTheme.colorScheme.onSurface
-                    .withValues(alpha: 0.6),
+                color: AppTheme.lightTheme.colorScheme.onSurface.withValues(
+                  alpha: 0.6,
+                ),
                 size: 20,
               ),
             ),
@@ -157,8 +161,9 @@ class PasswordFormWidget extends StatelessWidget {
               padding: EdgeInsets.all(3.w),
               child: CustomIconWidget(
                 iconName: 'lock',
-                color: AppTheme.lightTheme.colorScheme.onSurface
-                    .withValues(alpha: 0.6),
+                color: AppTheme.lightTheme.colorScheme.onSurface.withValues(
+                  alpha: 0.6,
+                ),
                 size: 20,
               ),
             ),
@@ -169,8 +174,9 @@ class PasswordFormWidget extends StatelessWidget {
                   icon: CustomIconWidget(
                     iconName:
                         isPasswordVisible ? 'visibility_off' : 'visibility',
-                    color: AppTheme.lightTheme.colorScheme.onSurface
-                        .withValues(alpha: 0.6),
+                    color: AppTheme.lightTheme.colorScheme.onSurface.withValues(
+                      alpha: 0.6,
+                    ),
                     size: 20,
                   ),
                   onPressed: onPasswordVisibilityToggle,
@@ -207,7 +213,8 @@ class PasswordFormWidget extends StatelessWidget {
                   backgroundColor: AppTheme.lightTheme.colorScheme.outline
                       .withValues(alpha: 0.3),
                   valueColor: AlwaysStoppedAnimation<Color>(
-                      _getPasswordStrengthColor()),
+                    _getPasswordStrengthColor(),
+                  ),
                   minHeight: 1.h,
                 ),
               ),
@@ -240,8 +247,9 @@ class PasswordFormWidget extends StatelessWidget {
               padding: EdgeInsets.all(3.w),
               child: CustomIconWidget(
                 iconName: 'language',
-                color: AppTheme.lightTheme.colorScheme.onSurface
-                    .withValues(alpha: 0.6),
+                color: AppTheme.lightTheme.colorScheme.onSurface.withValues(
+                  alpha: 0.6,
+                ),
                 size: 20,
               ),
             ),
@@ -271,34 +279,39 @@ class PasswordFormWidget extends StatelessWidget {
         Wrap(
           spacing: 2.w,
           runSpacing: 1.h,
-          children: categories.map((category) {
-            final isSelected = selectedCategory == category;
-            return FilterChip(
-              label: Text(category),
-              selected: isSelected,
-              onSelected: (selected) {
-                if (selected) {
-                  onCategoryChanged(category);
-                }
-              },
-              backgroundColor: AppTheme.lightTheme.colorScheme.surface,
-              selectedColor: AppTheme.lightTheme.colorScheme.primary
-                  .withValues(alpha: 0.1),
-              checkmarkColor: AppTheme.lightTheme.colorScheme.primary,
-              labelStyle: AppTheme.lightTheme.textTheme.bodyMedium?.copyWith(
-                color: isSelected
-                    ? AppTheme.lightTheme.colorScheme.primary
-                    : AppTheme.lightTheme.colorScheme.onSurface,
-                fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
-              ),
-              side: BorderSide(
-                color: isSelected
-                    ? AppTheme.lightTheme.colorScheme.primary
-                    : AppTheme.lightTheme.colorScheme.outline,
-                width: isSelected ? 2 : 1,
-              ),
-            );
-          }).toList(),
+          children:
+              categories.map((category) {
+                final isSelected = selectedCategory == category;
+                return FilterChip(
+                  label: Text(category),
+                  selected: isSelected,
+                  onSelected: (selected) {
+                    if (selected) {
+                      onCategoryChanged(category);
+                    }
+                  },
+                  backgroundColor: AppTheme.lightTheme.colorScheme.surface,
+                  selectedColor: AppTheme.lightTheme.colorScheme.primary
+                      .withValues(alpha: 0.1),
+                  checkmarkColor: AppTheme.lightTheme.colorScheme.primary,
+                  labelStyle: AppTheme.lightTheme.textTheme.bodyMedium
+                      ?.copyWith(
+                        color:
+                            isSelected
+                                ? AppTheme.lightTheme.colorScheme.primary
+                                : AppTheme.lightTheme.colorScheme.onSurface,
+                        fontWeight:
+                            isSelected ? FontWeight.w600 : FontWeight.w400,
+                      ),
+                  side: BorderSide(
+                    color:
+                        isSelected
+                            ? AppTheme.lightTheme.colorScheme.primary
+                            : AppTheme.lightTheme.colorScheme.outline,
+                    width: isSelected ? 2 : 1,
+                  ),
+                );
+              }).toList(),
         ),
         SizedBox(height: 4.h),
 
@@ -318,8 +331,9 @@ class PasswordFormWidget extends StatelessWidget {
               padding: EdgeInsets.all(3.w),
               child: CustomIconWidget(
                 iconName: 'notes',
-                color: AppTheme.lightTheme.colorScheme.onSurface
-                    .withValues(alpha: 0.6),
+                color: AppTheme.lightTheme.colorScheme.onSurface.withValues(
+                  alpha: 0.6,
+                ),
                 size: 20,
               ),
             ),

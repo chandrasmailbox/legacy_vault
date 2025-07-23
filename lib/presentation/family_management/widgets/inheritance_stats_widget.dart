@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../theme/app_theme.dart';
+import '../../../widgets/custom_icon_widget.dart';
 
 class InheritanceStatsWidget extends StatelessWidget {
   final int totalMembers;
@@ -78,9 +80,10 @@ class InheritanceStatsWidget extends StatelessWidget {
                     icon: 'warning',
                     title: 'Need Verification',
                     value: verificationNeeded.toString(),
-                    color: verificationNeeded > 0
-                        ? AppTheme.warningLight
-                        : AppTheme.successLight,
+                    color:
+                        verificationNeeded > 0
+                            ? AppTheme.warningLight
+                            : AppTheme.successLight,
                   ),
                 ),
               ],
@@ -107,10 +110,8 @@ class InheritanceStatsWidget extends StatelessWidget {
                     Expanded(
                       child: Text(
                         '$verificationNeeded family member${verificationNeeded > 1 ? 's' : ''} need${verificationNeeded == 1 ? 's' : ''} contact verification',
-                        style:
-                            AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
-                          color: AppTheme.warningLight,
-                        ),
+                        style: AppTheme.lightTheme.textTheme.bodySmall
+                            ?.copyWith(color: AppTheme.warningLight),
                       ),
                     ),
                   ],
@@ -134,20 +135,14 @@ class InheritanceStatsWidget extends StatelessWidget {
       decoration: BoxDecoration(
         color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: color.withValues(alpha: 0.3),
-        ),
+        border: Border.all(color: color.withValues(alpha: 0.3)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              CustomIconWidget(
-                iconName: icon,
-                color: color,
-                size: 20,
-              ),
+              CustomIconWidget(iconName: icon, color: color, size: 20),
               Spacer(),
               Text(
                 value,

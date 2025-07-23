@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../theme/app_theme.dart';
+import '../../../widgets/custom_icon_widget.dart';
 
 class FamilyMemberCardWidget extends StatelessWidget {
   final Map<String, dynamic> member;
@@ -91,29 +93,30 @@ class FamilyMemberCardWidget extends StatelessWidget {
         confirmDismiss: (direction) async {
           return await showDialog<bool>(
                 context: context,
-                builder: (context) => AlertDialog(
-                  title: Text(
-                    'Remove Family Member',
-                    style: AppTheme.lightTheme.textTheme.titleLarge,
-                  ),
-                  content: Text(
-                    'Are you sure you want to remove ${member["name"]} from your digital will?',
-                    style: AppTheme.lightTheme.textTheme.bodyMedium,
-                  ),
-                  actions: [
-                    TextButton(
-                      onPressed: () => Navigator.of(context).pop(false),
-                      child: Text('Cancel'),
-                    ),
-                    TextButton(
-                      onPressed: () => Navigator.of(context).pop(true),
-                      style: TextButton.styleFrom(
-                        foregroundColor: AppTheme.errorLight,
+                builder:
+                    (context) => AlertDialog(
+                      title: Text(
+                        'Remove Family Member',
+                        style: AppTheme.lightTheme.textTheme.titleLarge,
                       ),
-                      child: Text('Remove'),
+                      content: Text(
+                        'Are you sure you want to remove ${member["name"]} from your digital will?',
+                        style: AppTheme.lightTheme.textTheme.bodyMedium,
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.of(context).pop(false),
+                          child: Text('Cancel'),
+                        ),
+                        TextButton(
+                          onPressed: () => Navigator.of(context).pop(true),
+                          style: TextButton.styleFrom(
+                            foregroundColor: AppTheme.errorLight,
+                          ),
+                          child: Text('Remove'),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
               ) ??
               false;
         },
@@ -125,13 +128,15 @@ class FamilyMemberCardWidget extends StatelessWidget {
             color: AppTheme.lightTheme.colorScheme.surface,
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
-              color: AppTheme.lightTheme.colorScheme.outline
-                  .withValues(alpha: 0.2),
+              color: AppTheme.lightTheme.colorScheme.outline.withValues(
+                alpha: 0.2,
+              ),
             ),
             boxShadow: [
               BoxShadow(
-                color: AppTheme.lightTheme.colorScheme.shadow
-                    .withValues(alpha: 0.05),
+                color: AppTheme.lightTheme.colorScheme.shadow.withValues(
+                  alpha: 0.05,
+                ),
                 blurRadius: 4,
                 offset: const Offset(0, 2),
               ),
@@ -150,15 +155,17 @@ class FamilyMemberCardWidget extends StatelessWidget {
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color: _getRelationshipColor(
-                              member["relationship"] as String)
-                          .withValues(alpha: 0.1),
+                        member["relationship"] as String,
+                      ).withValues(alpha: 0.1),
                     ),
                     child: Center(
                       child: CustomIconWidget(
                         iconName: _getRelationshipIcon(
-                            member["relationship"] as String),
+                          member["relationship"] as String,
+                        ),
                         color: _getRelationshipColor(
-                            member["relationship"] as String),
+                          member["relationship"] as String,
+                        ),
                         size: 24,
                       ),
                     ),
@@ -174,19 +181,18 @@ class FamilyMemberCardWidget extends StatelessWidget {
                         Text(
                           member["name"] as String,
                           style: AppTheme.lightTheme.textTheme.titleMedium
-                              ?.copyWith(
-                            fontWeight: FontWeight.w600,
-                          ),
+                              ?.copyWith(fontWeight: FontWeight.w600),
                           overflow: TextOverflow.ellipsis,
                         ),
                         Text(
                           member["relationship"] as String,
-                          style:
-                              AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
-                            color: _getRelationshipColor(
-                                member["relationship"] as String),
-                            fontWeight: FontWeight.w500,
-                          ),
+                          style: AppTheme.lightTheme.textTheme.bodySmall
+                              ?.copyWith(
+                                color: _getRelationshipColor(
+                                  member["relationship"] as String,
+                                ),
+                                fontWeight: FontWeight.w500,
+                              ),
                         ),
                       ],
                     ),
@@ -223,8 +229,11 @@ class FamilyMemberCardWidget extends StatelessWidget {
                         children: [
                           CustomIconWidget(
                             iconName: 'email',
-                            color: AppTheme
-                                .lightTheme.colorScheme.onSurfaceVariant,
+                            color:
+                                AppTheme
+                                    .lightTheme
+                                    .colorScheme
+                                    .onSurfaceVariant,
                             size: 16,
                           ),
                           SizedBox(width: 2.w),
@@ -268,8 +277,10 @@ class FamilyMemberCardWidget extends StatelessWidget {
                 Container(
                   margin: EdgeInsets.only(top: 2.h),
                   child: Container(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.h),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 3.w,
+                      vertical: 1.h,
+                    ),
                     decoration: BoxDecoration(
                       color: AppTheme.warningLight.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(16),
@@ -290,9 +301,9 @@ class FamilyMemberCardWidget extends StatelessWidget {
                           'Emergency Contact',
                           style: AppTheme.lightTheme.textTheme.labelSmall
                               ?.copyWith(
-                            color: AppTheme.warningLight,
-                            fontWeight: FontWeight.w600,
-                          ),
+                                color: AppTheme.warningLight,
+                                fontWeight: FontWeight.w600,
+                              ),
                         ),
                       ],
                     ),

@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../core/app_export.dart';
+import '../../theme/app_theme.dart';
+import '../../widgets/custom_icon_widget.dart';
 import './widgets/beneficiary_overview_widget.dart';
 import './widgets/inheritance_status_widget.dart';
 import './widgets/inheritance_timeline_widget.dart';
@@ -123,7 +125,9 @@ class _InheritanceStatusDashboardState extends State<InheritanceStatusDashboard>
     );
     _statusAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(
-          parent: _statusAnimationController, curve: Curves.easeInOut),
+        parent: _statusAnimationController,
+        curve: Curves.easeInOut,
+      ),
     );
 
     _statusAnimationController.forward();
@@ -188,25 +192,26 @@ class _InheritanceStatusDashboardState extends State<InheritanceStatusDashboard>
   void _testInheritanceProcess() {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Test Inheritance Process'),
-        content: const Text(
-          'This will simulate the complete inheritance workflow without actually triggering it. Test notifications will be sent to all beneficiaries.',
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
+      builder:
+          (context) => AlertDialog(
+            title: const Text('Test Inheritance Process'),
+            content: const Text(
+              'This will simulate the complete inheritance workflow without actually triggering it. Test notifications will be sent to all beneficiaries.',
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('Cancel'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  _runInheritanceTest();
+                },
+                child: const Text('Start Test'),
+              ),
+            ],
           ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-              _runInheritanceTest();
-            },
-            child: const Text('Start Test'),
-          ),
-        ],
-      ),
     );
   }
 
@@ -214,16 +219,17 @@ class _InheritanceStatusDashboardState extends State<InheritanceStatusDashboard>
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (context) => const AlertDialog(
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            CircularProgressIndicator(),
-            SizedBox(height: 16),
-            Text('Running inheritance test...'),
-          ],
-        ),
-      ),
+      builder:
+          (context) => const AlertDialog(
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CircularProgressIndicator(),
+                SizedBox(height: 16),
+                Text('Running inheritance test...'),
+              ],
+            ),
+          ),
     );
 
     // Simulate test process
@@ -282,9 +288,10 @@ class _InheritanceStatusDashboardState extends State<InheritanceStatusDashboard>
                     width: 8,
                     height: 8,
                     decoration: BoxDecoration(
-                      color: _inheritanceStatus == 'triggered'
-                          ? AppTheme.lightTheme.colorScheme.error
-                          : Colors.orange,
+                      color:
+                          _inheritanceStatus == 'triggered'
+                              ? AppTheme.lightTheme.colorScheme.error
+                              : Colors.orange,
                       shape: BoxShape.circle,
                     ),
                   ),

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../core/app_export.dart';
+import '../../theme/app_theme.dart';
+import '../../widgets/custom_icon_widget.dart';
 import './widgets/category_filter_widget.dart';
 import './widgets/password_card_widget.dart';
 import './widgets/proof_of_life_banner_widget.dart';
@@ -89,7 +91,7 @@ class _PasswordVaultState extends State<PasswordVault>
     'Banking',
     'Personal',
     'Work',
-    'Social'
+    'Social',
   ];
 
   List<Map<String, dynamic>> _filteredEntries = [];
@@ -110,20 +112,23 @@ class _PasswordVaultState extends State<PasswordVault>
 
   void _filterEntries() {
     setState(() {
-      _filteredEntries = _passwordEntries.where((entry) {
-        final matchesSearch = _searchController.text.isEmpty ||
-            (entry["serviceName"] as String)
-                .toLowerCase()
-                .contains(_searchController.text.toLowerCase()) ||
-            (entry["username"] as String)
-                .toLowerCase()
-                .contains(_searchController.text.toLowerCase());
+      _filteredEntries =
+          _passwordEntries.where((entry) {
+            final matchesSearch =
+                _searchController.text.isEmpty ||
+                (entry["serviceName"] as String).toLowerCase().contains(
+                  _searchController.text.toLowerCase(),
+                ) ||
+                (entry["username"] as String).toLowerCase().contains(
+                  _searchController.text.toLowerCase(),
+                );
 
-        final matchesCategory = _selectedCategory == 'All' ||
-            entry["category"] == _selectedCategory;
+            final matchesCategory =
+                _selectedCategory == 'All' ||
+                entry["category"] == _selectedCategory;
 
-        return matchesSearch && matchesCategory;
-      }).toList();
+            return matchesSearch && matchesCategory;
+          }).toList();
     });
   }
 
@@ -161,23 +166,27 @@ class _PasswordVaultState extends State<PasswordVault>
                 children: [
                   // App bar
                   Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 4.w,
+                      vertical: 2.h,
+                    ),
                     child: Row(
                       children: [
                         Text(
                           'Legacy Vault',
                           style: AppTheme.lightTheme.textTheme.headlineSmall
                               ?.copyWith(
-                            fontWeight: FontWeight.w700,
-                            color: AppTheme.lightTheme.colorScheme.primary,
-                          ),
+                                fontWeight: FontWeight.w700,
+                                color: AppTheme.lightTheme.colorScheme.primary,
+                              ),
                         ),
                         const Spacer(),
                         IconButton(
                           onPressed: () {
                             Navigator.pushNamed(
-                                context, '/biometric-authentication-setup');
+                              context,
+                              '/biometric-authentication-setup',
+                            );
                           },
                           icon: CustomIconWidget(
                             iconName: 'settings',
@@ -201,25 +210,32 @@ class _PasswordVaultState extends State<PasswordVault>
                           padding: EdgeInsets.all(3.w),
                           child: CustomIconWidget(
                             iconName: 'search',
-                            color: AppTheme
-                                .lightTheme.colorScheme.onSurfaceVariant,
+                            color:
+                                AppTheme
+                                    .lightTheme
+                                    .colorScheme
+                                    .onSurfaceVariant,
                             size: 20,
                           ),
                         ),
-                        suffixIcon: _searchController.text.isNotEmpty
-                            ? IconButton(
-                                onPressed: () {
-                                  _searchController.clear();
-                                  _filterEntries();
-                                },
-                                icon: CustomIconWidget(
-                                  iconName: 'clear',
-                                  color: AppTheme
-                                      .lightTheme.colorScheme.onSurfaceVariant,
-                                  size: 20,
-                                ),
-                              )
-                            : null,
+                        suffixIcon:
+                            _searchController.text.isNotEmpty
+                                ? IconButton(
+                                  onPressed: () {
+                                    _searchController.clear();
+                                    _filterEntries();
+                                  },
+                                  icon: CustomIconWidget(
+                                    iconName: 'clear',
+                                    color:
+                                        AppTheme
+                                            .lightTheme
+                                            .colorScheme
+                                            .onSurfaceVariant,
+                                    size: 20,
+                                  ),
+                                )
+                                : null,
                         contentPadding: EdgeInsets.symmetric(
                           horizontal: 4.w,
                           vertical: 1.5.h,
@@ -308,19 +324,20 @@ class _PasswordVaultState extends State<PasswordVault>
           ],
         ),
       ),
-      floatingActionButton: _tabController.index == 0
-          ? FloatingActionButton.extended(
-              onPressed: () {
-                Navigator.pushNamed(context, '/add-edit-password');
-              },
-              icon: CustomIconWidget(
-                iconName: 'add',
-                color: Colors.white,
-                size: 24,
-              ),
-              label: const Text('Add Password'),
-            )
-          : null,
+      floatingActionButton:
+          _tabController.index == 0
+              ? FloatingActionButton.extended(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/add-edit-password');
+                },
+                icon: CustomIconWidget(
+                  iconName: 'add',
+                  color: Colors.white,
+                  size: 24,
+                ),
+                label: const Text('Add Password'),
+              )
+              : null,
     );
   }
 
@@ -342,38 +359,41 @@ class _PasswordVaultState extends State<PasswordVault>
 
         // Password list
         Expanded(
-          child: _filteredEntries.isEmpty
-              ? _buildEmptyState()
-              : RefreshIndicator(
-                  onRefresh: _refreshData,
-                  child: ListView.builder(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
-                    itemCount: _filteredEntries.length,
-                    itemBuilder: (context, index) {
-                      final entry = _filteredEntries[index];
-                      return PasswordCardWidget(
-                        entry: entry,
-                        onTap: () {
-                          // Navigate to password detail screen
-                          _showPasswordDetails(entry);
-                        },
-                        onEdit: () {
-                          Navigator.pushNamed(context, '/add-edit-password');
-                        },
-                        onDelete: () {
-                          _showDeleteConfirmation(entry);
-                        },
-                        onCopyPassword: () {
-                          _copyToClipboard('Password copied');
-                        },
-                        onCopyUsername: () {
-                          _copyToClipboard('Username copied');
-                        },
-                      );
-                    },
+          child:
+              _filteredEntries.isEmpty
+                  ? _buildEmptyState()
+                  : RefreshIndicator(
+                    onRefresh: _refreshData,
+                    child: ListView.builder(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 4.w,
+                        vertical: 1.h,
+                      ),
+                      itemCount: _filteredEntries.length,
+                      itemBuilder: (context, index) {
+                        final entry = _filteredEntries[index];
+                        return PasswordCardWidget(
+                          entry: entry,
+                          onTap: () {
+                            // Navigate to password detail screen
+                            _showPasswordDetails(entry);
+                          },
+                          onEdit: () {
+                            Navigator.pushNamed(context, '/add-edit-password');
+                          },
+                          onDelete: () {
+                            _showDeleteConfirmation(entry);
+                          },
+                          onCopyPassword: () {
+                            _copyToClipboard('Password copied');
+                          },
+                          onCopyUsername: () {
+                            _copyToClipboard('Username copied');
+                          },
+                        );
+                      },
+                    ),
                   ),
-                ),
         ),
 
         // Proof of life banner
@@ -396,8 +416,9 @@ class _PasswordVaultState extends State<PasswordVault>
           children: [
             CustomIconWidget(
               iconName: 'lock',
-              color: AppTheme.lightTheme.colorScheme.primary
-                  .withValues(alpha: 0.5),
+              color: AppTheme.lightTheme.colorScheme.primary.withValues(
+                alpha: 0.5,
+              ),
               size: 80,
             ),
             SizedBox(height: 3.h),
@@ -441,130 +462,137 @@ class _PasswordVaultState extends State<PasswordVault>
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      builder: (context) => Container(
-        height: 70.h,
-        decoration: BoxDecoration(
-          color: AppTheme.lightTheme.colorScheme.surface,
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
-        ),
-        child: Column(
-          children: [
-            // Handle bar
-            Container(
-              width: 12.w,
-              height: 0.5.h,
-              margin: EdgeInsets.symmetric(vertical: 1.h),
-              decoration: BoxDecoration(
-                color: AppTheme.lightTheme.colorScheme.onSurfaceVariant
-                    .withValues(alpha: 0.3),
-                borderRadius: BorderRadius.circular(2),
+      builder:
+          (context) => Container(
+            height: 70.h,
+            decoration: BoxDecoration(
+              color: AppTheme.lightTheme.colorScheme.surface,
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(20),
               ),
             ),
-
-            // Header
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
-              child: Row(
-                children: [
-                  CustomIconWidget(
-                    iconName: entry["icon"] as String,
-                    color: AppTheme.lightTheme.colorScheme.primary,
-                    size: 32,
+            child: Column(
+              children: [
+                // Handle bar
+                Container(
+                  width: 12.w,
+                  height: 0.5.h,
+                  margin: EdgeInsets.symmetric(vertical: 1.h),
+                  decoration: BoxDecoration(
+                    color: AppTheme.lightTheme.colorScheme.onSurfaceVariant
+                        .withValues(alpha: 0.3),
+                    borderRadius: BorderRadius.circular(2),
                   ),
-                  SizedBox(width: 3.w),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          entry["serviceName"] as String,
-                          style: AppTheme.lightTheme.textTheme.titleLarge,
+                ),
+
+                // Header
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
+                  child: Row(
+                    children: [
+                      CustomIconWidget(
+                        iconName: entry["icon"] as String,
+                        color: AppTheme.lightTheme.colorScheme.primary,
+                        size: 32,
+                      ),
+                      SizedBox(width: 3.w),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              entry["serviceName"] as String,
+                              style: AppTheme.lightTheme.textTheme.titleLarge,
+                            ),
+                            Text(
+                              entry["username"] as String,
+                              style: AppTheme.lightTheme.textTheme.bodyMedium
+                                  ?.copyWith(
+                                    color:
+                                        AppTheme
+                                            .lightTheme
+                                            .colorScheme
+                                            .onSurfaceVariant,
+                                  ),
+                            ),
+                          ],
                         ),
-                        Text(
-                          entry["username"] as String,
-                          style: AppTheme.lightTheme.textTheme.bodyMedium
-                              ?.copyWith(
-                            color: AppTheme
-                                .lightTheme.colorScheme.onSurfaceVariant,
-                          ),
+                      ),
+                      IconButton(
+                        onPressed: () => Navigator.pop(context),
+                        icon: CustomIconWidget(
+                          iconName: 'close',
+                          color:
+                              AppTheme.lightTheme.colorScheme.onSurfaceVariant,
+                          size: 24,
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                  IconButton(
-                    onPressed: () => Navigator.pop(context),
-                    icon: CustomIconWidget(
-                      iconName: 'close',
-                      color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
-                      size: 24,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+                ),
 
-            const Divider(),
+                const Divider(),
 
-            // Actions
-            Expanded(
-              child: ListView(
-                padding: EdgeInsets.all(4.w),
-                children: [
-                  _buildDetailAction(
-                    icon: 'copy',
-                    title: 'Copy Password',
-                    onTap: () {
-                      Navigator.pop(context);
-                      _copyToClipboard('Password copied');
-                    },
+                // Actions
+                Expanded(
+                  child: ListView(
+                    padding: EdgeInsets.all(4.w),
+                    children: [
+                      _buildDetailAction(
+                        icon: 'copy',
+                        title: 'Copy Password',
+                        onTap: () {
+                          Navigator.pop(context);
+                          _copyToClipboard('Password copied');
+                        },
+                      ),
+                      _buildDetailAction(
+                        icon: 'person',
+                        title: 'Copy Username',
+                        onTap: () {
+                          Navigator.pop(context);
+                          _copyToClipboard('Username copied');
+                        },
+                      ),
+                      _buildDetailAction(
+                        icon: 'edit',
+                        title: 'Edit Password',
+                        onTap: () {
+                          Navigator.pop(context);
+                          Navigator.pushNamed(context, '/add-edit-password');
+                        },
+                      ),
+                      _buildDetailAction(
+                        icon: 'share',
+                        title: 'Share Access',
+                        onTap: () {
+                          Navigator.pop(context);
+                          _showShareOptions();
+                        },
+                      ),
+                      _buildDetailAction(
+                        icon: 'refresh',
+                        title: 'Generate New Password',
+                        onTap: () {
+                          Navigator.pop(context);
+                          _generateNewPassword();
+                        },
+                      ),
+                      _buildDetailAction(
+                        icon: 'delete',
+                        title: 'Delete Password',
+                        isDestructive: true,
+                        onTap: () {
+                          Navigator.pop(context);
+                          _showDeleteConfirmation(entry);
+                        },
+                      ),
+                    ],
                   ),
-                  _buildDetailAction(
-                    icon: 'person',
-                    title: 'Copy Username',
-                    onTap: () {
-                      Navigator.pop(context);
-                      _copyToClipboard('Username copied');
-                    },
-                  ),
-                  _buildDetailAction(
-                    icon: 'edit',
-                    title: 'Edit Password',
-                    onTap: () {
-                      Navigator.pop(context);
-                      Navigator.pushNamed(context, '/add-edit-password');
-                    },
-                  ),
-                  _buildDetailAction(
-                    icon: 'share',
-                    title: 'Share Access',
-                    onTap: () {
-                      Navigator.pop(context);
-                      _showShareOptions();
-                    },
-                  ),
-                  _buildDetailAction(
-                    icon: 'refresh',
-                    title: 'Generate New Password',
-                    onTap: () {
-                      Navigator.pop(context);
-                      _generateNewPassword();
-                    },
-                  ),
-                  _buildDetailAction(
-                    icon: 'delete',
-                    title: 'Delete Password',
-                    isDestructive: true,
-                    onTap: () {
-                      Navigator.pop(context);
-                      _showDeleteConfirmation(entry);
-                    },
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),
     );
   }
 
@@ -577,17 +605,19 @@ class _PasswordVaultState extends State<PasswordVault>
     return ListTile(
       leading: CustomIconWidget(
         iconName: icon,
-        color: isDestructive
-            ? AppTheme.lightTheme.colorScheme.error
-            : AppTheme.lightTheme.colorScheme.primary,
+        color:
+            isDestructive
+                ? AppTheme.lightTheme.colorScheme.error
+                : AppTheme.lightTheme.colorScheme.primary,
         size: 24,
       ),
       title: Text(
         title,
         style: AppTheme.lightTheme.textTheme.bodyLarge?.copyWith(
-          color: isDestructive
-              ? AppTheme.lightTheme.colorScheme.error
-              : AppTheme.lightTheme.colorScheme.onSurface,
+          color:
+              isDestructive
+                  ? AppTheme.lightTheme.colorScheme.error
+                  : AppTheme.lightTheme.colorScheme.onSurface,
         ),
       ),
       onTap: onTap,
@@ -597,54 +627,59 @@ class _PasswordVaultState extends State<PasswordVault>
   void _showDeleteConfirmation(Map<String, dynamic> entry) {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Delete Password'),
-        content: Text(
-          'Are you sure you want to delete the password for ${entry["serviceName"]}? This action cannot be undone.',
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-              setState(() {
-                _passwordEntries.removeWhere((e) => e["id"] == entry["id"]);
-                _filterEntries();
-              });
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('Password for ${entry["serviceName"]} deleted'),
-                ),
-              );
-            },
-            child: Text(
-              'Delete',
-              style: TextStyle(color: AppTheme.lightTheme.colorScheme.error),
+      builder:
+          (context) => AlertDialog(
+            title: const Text('Delete Password'),
+            content: Text(
+              'Are you sure you want to delete the password for ${entry["serviceName"]}? This action cannot be undone.',
             ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  setState(() {
+                    _passwordEntries.removeWhere((e) => e["id"] == entry["id"]);
+                    _filterEntries();
+                  });
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        'Password for ${entry["serviceName"]} deleted',
+                      ),
+                    ),
+                  );
+                },
+                child: Text(
+                  'Delete',
+                  style: TextStyle(
+                    color: AppTheme.lightTheme.colorScheme.error,
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
     );
   }
 
   void _copyToClipboard(String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(message)),
-    );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(message)));
   }
 
   void _showShareOptions() {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Share options coming soon')),
-    );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text('Share options coming soon')));
   }
 
   void _generateNewPassword() {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('New password generated')),
-    );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text('New password generated')));
   }
 }

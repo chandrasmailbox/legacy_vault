@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../theme/app_theme.dart';
+import '../../../widgets/custom_icon_widget.dart';
+import '../../../widgets/custom_image_widget.dart';
 
 class FamilyMemberCardWidget extends StatelessWidget {
   final Map<String, dynamic> member;
@@ -159,14 +162,8 @@ class FamilyMemberCardWidget extends StatelessWidget {
         color: AppTheme.lightTheme.primaryColor,
         size: 24,
       ),
-      title: Text(
-        title,
-        style: AppTheme.lightTheme.textTheme.titleMedium,
-      ),
-      subtitle: Text(
-        subtitle,
-        style: AppTheme.lightTheme.textTheme.bodySmall,
-      ),
+      title: Text(title, style: AppTheme.lightTheme.textTheme.titleMedium),
+      subtitle: Text(subtitle, style: AppTheme.lightTheme.textTheme.bodySmall),
       onTap: onTap,
     );
   }
@@ -217,8 +214,9 @@ class FamilyMemberCardWidget extends StatelessWidget {
               builder: (BuildContext context) {
                 return AlertDialog(
                   title: Text('Choose Action'),
-                  content:
-                      Text('What would you like to do with ${member['name']}?'),
+                  content: Text(
+                    'What would you like to do with ${member['name']}?',
+                  ),
                   actions: [
                     TextButton(
                       onPressed: () => Navigator.pop(context, false),
@@ -273,22 +271,27 @@ class FamilyMemberCardWidget extends StatelessWidget {
                         ),
                       ),
                       child: ClipOval(
-                        child: member['profileImage'] != null
-                            ? CustomImageWidget(
-                                imageUrl: member['profileImage'] as String,
-                                width: 15.w,
-                                height: 15.w,
-                                fit: BoxFit.cover,
-                              )
-                            : Container(
-                                color: AppTheme.lightTheme.colorScheme.surface,
-                                child: CustomIconWidget(
-                                  iconName: 'person',
-                                  color: AppTheme
-                                      .lightTheme.colorScheme.onSurfaceVariant,
-                                  size: 8.w,
+                        child:
+                            member['profileImage'] != null
+                                ? CustomImageWidget(
+                                  imageUrl: member['profileImage'] as String,
+                                  width: 15.w,
+                                  height: 15.w,
+                                  fit: BoxFit.cover,
+                                )
+                                : Container(
+                                  color:
+                                      AppTheme.lightTheme.colorScheme.surface,
+                                  child: CustomIconWidget(
+                                    iconName: 'person',
+                                    color:
+                                        AppTheme
+                                            .lightTheme
+                                            .colorScheme
+                                            .onSurfaceVariant,
+                                    size: 8.w,
+                                  ),
                                 ),
-                              ),
                       ),
                     ),
                     SizedBox(width: 3.w),
@@ -312,20 +315,24 @@ class FamilyMemberCardWidget extends StatelessWidget {
                     ),
                     // Status indicator
                     Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 2.w,
+                        vertical: 1.h,
+                      ),
                       decoration: BoxDecoration(
-                        color: _getStatusColor(member['status'] as String)
-                            .withValues(alpha: 0.1),
+                        color: _getStatusColor(
+                          member['status'] as String,
+                        ).withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           CustomIconWidget(
-                            iconName: _getStatusIcon(member['status'] as String)
-                                .codePoint
-                                .toString(),
+                            iconName:
+                                _getStatusIcon(
+                                  member['status'] as String,
+                                ).codePoint.toString(),
                             color: _getStatusColor(member['status'] as String),
                             size: 16,
                           ),
@@ -334,9 +341,10 @@ class FamilyMemberCardWidget extends StatelessWidget {
                             _getStatusText(member['status'] as String),
                             style: AppTheme.lightTheme.textTheme.labelSmall
                                 ?.copyWith(
-                              color:
-                                  _getStatusColor(member['status'] as String),
-                            ),
+                                  color: _getStatusColor(
+                                    member['status'] as String,
+                                  ),
+                                ),
                           ),
                         ],
                       ),
@@ -354,8 +362,11 @@ class FamilyMemberCardWidget extends StatelessWidget {
                         children: [
                           CustomIconWidget(
                             iconName: 'email',
-                            color: AppTheme
-                                .lightTheme.colorScheme.onSurfaceVariant,
+                            color:
+                                AppTheme
+                                    .lightTheme
+                                    .colorScheme
+                                    .onSurfaceVariant,
                             size: 16,
                           ),
                           SizedBox(width: 2.w),
@@ -375,8 +386,11 @@ class FamilyMemberCardWidget extends StatelessWidget {
                         children: [
                           CustomIconWidget(
                             iconName: 'phone',
-                            color: AppTheme
-                                .lightTheme.colorScheme.onSurfaceVariant,
+                            color:
+                                AppTheme
+                                    .lightTheme
+                                    .colorScheme
+                                    .onSurfaceVariant,
                             size: 16,
                           ),
                           SizedBox(width: 2.w),
@@ -401,16 +415,18 @@ class FamilyMemberCardWidget extends StatelessWidget {
                     Expanded(
                       child: Container(
                         padding: EdgeInsets.symmetric(
-                            horizontal: 3.w, vertical: 1.h),
+                          horizontal: 3.w,
+                          vertical: 1.h,
+                        ),
                         decoration: BoxDecoration(
                           color: _getAccessLevelColor(
-                                  member['accessLevel'] as String)
-                              .withValues(alpha: 0.1),
+                            member['accessLevel'] as String,
+                          ).withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(8),
                           border: Border.all(
                             color: _getAccessLevelColor(
-                                    member['accessLevel'] as String)
-                                .withValues(alpha: 0.3),
+                              member['accessLevel'] as String,
+                            ).withValues(alpha: 0.3),
                           ),
                         ),
                         child: Column(
@@ -425,10 +441,11 @@ class FamilyMemberCardWidget extends StatelessWidget {
                               member['accessLevel'] as String,
                               style: AppTheme.lightTheme.textTheme.labelMedium
                                   ?.copyWith(
-                                color: _getAccessLevelColor(
-                                    member['accessLevel'] as String),
-                                fontWeight: FontWeight.w600,
-                              ),
+                                    color: _getAccessLevelColor(
+                                      member['accessLevel'] as String,
+                                    ),
+                                    fontWeight: FontWeight.w600,
+                                  ),
                             ),
                           ],
                         ),
@@ -438,7 +455,9 @@ class FamilyMemberCardWidget extends StatelessWidget {
                     Expanded(
                       child: Container(
                         padding: EdgeInsets.symmetric(
-                            horizontal: 3.w, vertical: 1.h),
+                          horizontal: 3.w,
+                          vertical: 1.h,
+                        ),
                         decoration: BoxDecoration(
                           color: AppTheme.lightTheme.colorScheme.surface,
                           borderRadius: BorderRadius.circular(8),
@@ -457,9 +476,7 @@ class FamilyMemberCardWidget extends StatelessWidget {
                             Text(
                               '${member['inheritedItems']} items',
                               style: AppTheme.lightTheme.textTheme.labelMedium
-                                  ?.copyWith(
-                                fontWeight: FontWeight.w600,
-                              ),
+                                  ?.copyWith(fontWeight: FontWeight.w600),
                             ),
                           ],
                         ),
@@ -487,7 +504,9 @@ class FamilyMemberCardWidget extends StatelessWidget {
                     if (member['contactVerified'] as bool)
                       Container(
                         padding: EdgeInsets.symmetric(
-                            horizontal: 2.w, vertical: 0.5.h),
+                          horizontal: 2.w,
+                          vertical: 0.5.h,
+                        ),
                         decoration: BoxDecoration(
                           color: AppTheme.successLight.withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(8),
@@ -504,9 +523,7 @@ class FamilyMemberCardWidget extends StatelessWidget {
                             Text(
                               'Verified',
                               style: AppTheme.lightTheme.textTheme.labelSmall
-                                  ?.copyWith(
-                                color: AppTheme.successLight,
-                              ),
+                                  ?.copyWith(color: AppTheme.successLight),
                             ),
                           ],
                         ),
@@ -514,7 +531,9 @@ class FamilyMemberCardWidget extends StatelessWidget {
                     else
                       Container(
                         padding: EdgeInsets.symmetric(
-                            horizontal: 2.w, vertical: 0.5.h),
+                          horizontal: 2.w,
+                          vertical: 0.5.h,
+                        ),
                         decoration: BoxDecoration(
                           color: AppTheme.warningLight.withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(8),
@@ -531,9 +550,7 @@ class FamilyMemberCardWidget extends StatelessWidget {
                             Text(
                               'Unverified',
                               style: AppTheme.lightTheme.textTheme.labelSmall
-                                  ?.copyWith(
-                                color: AppTheme.warningLight,
-                              ),
+                                  ?.copyWith(color: AppTheme.warningLight),
                             ),
                           ],
                         ),

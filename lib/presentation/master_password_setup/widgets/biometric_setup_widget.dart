@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../theme/app_theme.dart';
+import '../../../widgets/custom_icon_widget.dart';
 
 class BiometricSetupWidget extends StatelessWidget {
   final bool enabled;
@@ -43,10 +45,7 @@ class BiometricSetupWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              Switch(
-                value: enabled,
-                onChanged: onChanged,
-              ),
+              Switch(value: enabled, onChanged: onChanged),
             ],
           ),
           SizedBox(height: 1.h),

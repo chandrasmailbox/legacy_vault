@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../theme/app_theme.dart';
+import '../../../widgets/custom_icon_widget.dart';
 
 class QuickActionsWidget extends StatelessWidget {
   final VoidCallback onCheckIn;
@@ -132,18 +134,24 @@ class QuickActionsWidget extends StatelessWidget {
                                 'Test Inheritance Process',
                                 style: AppTheme.lightTheme.textTheme.titleSmall
                                     ?.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                  color:
-                                      AppTheme.lightTheme.colorScheme.primary,
-                                ),
+                                      fontWeight: FontWeight.bold,
+                                      color:
+                                          AppTheme
+                                              .lightTheme
+                                              .colorScheme
+                                              .primary,
+                                    ),
                               ),
                               Text(
                                 'Simulate the complete workflow',
                                 style: AppTheme.lightTheme.textTheme.bodySmall
                                     ?.copyWith(
-                                  color: AppTheme.lightTheme.colorScheme.primary
-                                      .withAlpha(179),
-                                ),
+                                      color: AppTheme
+                                          .lightTheme
+                                          .colorScheme
+                                          .primary
+                                          .withAlpha(179),
+                                    ),
                               ),
                             ],
                           ),
@@ -179,17 +187,11 @@ class QuickActionsWidget extends StatelessWidget {
         decoration: BoxDecoration(
           color: color.withAlpha(26),
           borderRadius: BorderRadius.circular(8),
-          border: Border.all(
-            color: color.withAlpha(64),
-          ),
+          border: Border.all(color: color.withAlpha(64)),
         ),
         child: Row(
           children: [
-            CustomIconWidget(
-              iconName: iconName,
-              color: color,
-              size: 20,
-            ),
+            CustomIconWidget(iconName: iconName, color: color, size: 20),
             SizedBox(width: 2.w),
             Expanded(
               child: Text(

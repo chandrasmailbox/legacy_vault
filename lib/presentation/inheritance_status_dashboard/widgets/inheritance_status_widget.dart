@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../theme/app_theme.dart';
+import '../../../widgets/custom_icon_widget.dart';
 
 class InheritanceStatusWidget extends StatelessWidget {
   final String status;
@@ -145,18 +147,18 @@ class InheritanceStatusWidget extends StatelessWidget {
                     children: [
                       Text(
                         'Next Check-in Required',
-                        style:
-                            AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
-                          color: AppTheme.lightTheme.colorScheme.primary,
-                        ),
+                        style: AppTheme.lightTheme.textTheme.bodySmall
+                            ?.copyWith(
+                              color: AppTheme.lightTheme.colorScheme.primary,
+                            ),
                       ),
                       Text(
                         _formatTimeRemaining(),
-                        style:
-                            AppTheme.lightTheme.textTheme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: AppTheme.lightTheme.colorScheme.primary,
-                        ),
+                        style: AppTheme.lightTheme.textTheme.titleMedium
+                            ?.copyWith(
+                              fontWeight: FontWeight.bold,
+                              color: AppTheme.lightTheme.colorScheme.primary,
+                            ),
                       ),
                     ],
                   ),

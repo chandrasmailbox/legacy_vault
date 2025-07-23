@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../theme/app_theme.dart';
+import '../../../widgets/custom_icon_widget.dart';
 
 class SecurityRequirementsWidget extends StatelessWidget {
   final bool hasMinLength;
@@ -40,26 +42,11 @@ class SecurityRequirementsWidget extends StatelessWidget {
             ),
           ),
           SizedBox(height: 2.h),
-          _buildRequirement(
-            'At least 12 characters',
-            hasMinLength,
-          ),
-          _buildRequirement(
-            'Uppercase letters (A-Z)',
-            hasUpperCase,
-          ),
-          _buildRequirement(
-            'Lowercase letters (a-z)',
-            hasLowerCase,
-          ),
-          _buildRequirement(
-            'Numbers (0-9)',
-            hasNumbers,
-          ),
-          _buildRequirement(
-            'Special symbols (!@#\$%...)',
-            hasSymbols,
-          ),
+          _buildRequirement('At least 12 characters', hasMinLength),
+          _buildRequirement('Uppercase letters (A-Z)', hasUpperCase),
+          _buildRequirement('Lowercase letters (a-z)', hasLowerCase),
+          _buildRequirement('Numbers (0-9)', hasNumbers),
+          _buildRequirement('Special symbols (!@#\$%...)', hasSymbols),
         ],
       ),
     );
@@ -72,10 +59,11 @@ class SecurityRequirementsWidget extends StatelessWidget {
         children: [
           CustomIconWidget(
             iconName: isMet ? 'check_circle' : 'radio_button_unchecked',
-            color: isMet
-                ? AppTheme.lightTheme.colorScheme.primary
-                : AppTheme.lightTheme.colorScheme.onSurfaceVariant
-                    .withAlpha(128),
+            color:
+                isMet
+                    ? AppTheme.lightTheme.colorScheme.primary
+                    : AppTheme.lightTheme.colorScheme.onSurfaceVariant
+                        .withAlpha(128),
             size: 20,
           ),
           SizedBox(width: 2.w),
@@ -83,9 +71,10 @@ class SecurityRequirementsWidget extends StatelessWidget {
             child: Text(
               text,
               style: AppTheme.lightTheme.textTheme.bodyMedium?.copyWith(
-                color: isMet
-                    ? AppTheme.lightTheme.colorScheme.onSurface
-                    : AppTheme.lightTheme.colorScheme.onSurfaceVariant,
+                color:
+                    isMet
+                        ? AppTheme.lightTheme.colorScheme.onSurface
+                        : AppTheme.lightTheme.colorScheme.onSurfaceVariant,
                 decoration: isMet ? null : TextDecoration.none,
               ),
             ),

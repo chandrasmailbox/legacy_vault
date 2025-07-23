@@ -66,8 +66,9 @@ class _SecuritySettingsState extends State<SecuritySettings> {
                     Container(
                       padding: EdgeInsets.all(3.w),
                       decoration: BoxDecoration(
-                        color:
-                            Theme.of(context).colorScheme.primary.withAlpha(26),
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.primary.withAlpha(26),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Icon(
@@ -83,13 +84,12 @@ class _SecuritySettingsState extends State<SecuritySettings> {
                         children: [
                           Text(
                             'Security Status: Strong',
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium
-                                ?.copyWith(
-                                  color: Theme.of(context).colorScheme.primary,
-                                  fontWeight: FontWeight.w600,
-                                ),
+                            style: Theme.of(
+                              context,
+                            ).textTheme.titleMedium?.copyWith(
+                              color: Theme.of(context).colorScheme.primary,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                           SizedBox(height: 1.w),
                           Text(
@@ -214,8 +214,8 @@ class _SecuritySettingsState extends State<SecuritySettings> {
                     Text(
                       'Export & Backup',
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.w600,
-                          ),
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                     SizedBox(height: 2.w),
                     Text(
@@ -247,28 +247,27 @@ class _SecuritySettingsState extends State<SecuritySettings> {
   void _showSecurityHelp(BuildContext context) {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Security Settings Help'),
-        content: const Text(
-          'Configure your vault\'s security settings to protect your sensitive data. Enable biometric authentication, adjust session timeouts, and customize encryption parameters based on your security needs.',
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Got it'),
+      builder:
+          (context) => AlertDialog(
+            title: const Text('Security Settings Help'),
+            content: const Text(
+              'Configure your vault\'s security settings to protect your sensitive data. Enable biometric authentication, adjust session timeouts, and customize encryption parameters based on your security needs.',
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('Got it'),
+              ),
+            ],
           ),
-        ],
-      ),
     );
   }
 
   void _runSecurityAudit() {
     // TODO: Implement comprehensive security audit
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Running security audit...'),
-      ),
-    );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text('Running security audit...')));
   }
 
   void _configureEmergencyAccess() {
@@ -283,9 +282,7 @@ class _SecuritySettingsState extends State<SecuritySettings> {
   void _exportSecuritySettings() {
     // TODO: Implement settings export functionality
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Exporting security settings...'),
-      ),
+      const SnackBar(content: Text('Exporting security settings...')),
     );
   }
 }

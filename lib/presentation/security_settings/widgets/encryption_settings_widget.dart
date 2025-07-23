@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-
 class EncryptionSettingsWidget extends StatelessWidget {
   final String algorithm;
   final int pbkdf2Iterations;
@@ -35,8 +34,8 @@ class EncryptionSettingsWidget extends StatelessWidget {
                 Text(
                   'Encryption Settings',
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ],
             ),
@@ -62,12 +61,13 @@ class EncryptionSettingsWidget extends StatelessWidget {
               trailing: DropdownButton<String>(
                 value: algorithm,
                 underline: const SizedBox(),
-                items: ['AES-256', 'AES-128'].map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
+                items:
+                    ['AES-256', 'AES-128'].map((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
                 onChanged: onAlgorithmChanged,
               ),
             ),
@@ -91,19 +91,29 @@ class EncryptionSettingsWidget extends StatelessWidget {
               ),
               title: const Text('Key Derivation'),
               subtitle: Text(
-                  'PBKDF2 iterations: ${_formatIterations(pbkdf2Iterations)}'),
+                'PBKDF2 iterations: ${_formatIterations(pbkdf2Iterations)}',
+              ),
               trailing: PopupMenuButton<int>(
                 child: const Icon(Icons.more_vert),
-                itemBuilder: (context) => [
-                  const PopupMenuItem(
-                      value: 50000, child: Text('50,000 (Fast)')),
-                  const PopupMenuItem(
-                      value: 100000, child: Text('100,000 (Recommended)')),
-                  const PopupMenuItem(
-                      value: 200000, child: Text('200,000 (Secure)')),
-                  const PopupMenuItem(
-                      value: 500000, child: Text('500,000 (Maximum)')),
-                ],
+                itemBuilder:
+                    (context) => [
+                      const PopupMenuItem(
+                        value: 50000,
+                        child: Text('50,000 (Fast)'),
+                      ),
+                      const PopupMenuItem(
+                        value: 100000,
+                        child: Text('100,000 (Recommended)'),
+                      ),
+                      const PopupMenuItem(
+                        value: 200000,
+                        child: Text('200,000 (Secure)'),
+                      ),
+                      const PopupMenuItem(
+                        value: 500000,
+                        child: Text('500,000 (Maximum)'),
+                      ),
+                    ],
                 onSelected: onIterationsChanged,
               ),
             ),
@@ -114,10 +124,9 @@ class EncryptionSettingsWidget extends StatelessWidget {
             Container(
               padding: EdgeInsets.all(3.w),
               decoration: BoxDecoration(
-                color: Theme.of(context)
-                    .colorScheme
-                    .primaryContainer
-                    .withAlpha(26),
+                color: Theme.of(
+                  context,
+                ).colorScheme.primaryContainer.withAlpha(26),
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(
                   color: Theme.of(context).colorScheme.primary.withAlpha(77),
@@ -137,9 +146,9 @@ class EncryptionSettingsWidget extends StatelessWidget {
                       Text(
                         'Encryption Details',
                         style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                              color: Theme.of(context).colorScheme.primary,
-                              fontWeight: FontWeight.w600,
-                            ),
+                          color: Theme.of(context).colorScheme.primary,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ],
                   ),
@@ -147,14 +156,17 @@ class EncryptionSettingsWidget extends StatelessWidget {
                   _buildDetailRow(context, 'Algorithm', algorithm),
                   _buildDetailRow(context, 'Key Size', '256-bit'),
                   _buildDetailRow(context, 'Block Mode', 'CBC'),
-                  _buildDetailRow(context, 'Iterations',
-                      _formatIterations(pbkdf2Iterations)),
+                  _buildDetailRow(
+                    context,
+                    'Iterations',
+                    _formatIterations(pbkdf2Iterations),
+                  ),
                   SizedBox(height: 2.w),
                   Text(
                     'Higher iteration counts provide better security but may slow down vault operations. The recommended setting balances security and performance.',
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          fontStyle: FontStyle.italic,
-                        ),
+                      fontStyle: FontStyle.italic,
+                    ),
                   ),
                 ],
               ),
@@ -171,16 +183,13 @@ class EncryptionSettingsWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            '$label:',
-            style: Theme.of(context).textTheme.bodySmall,
-          ),
+          Text('$label:', style: Theme.of(context).textTheme.bodySmall),
           Text(
             value,
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  fontWeight: FontWeight.w500,
-                  fontFamily: 'monospace',
-                ),
+              fontWeight: FontWeight.w500,
+              fontFamily: 'monospace',
+            ),
           ),
         ],
       ),

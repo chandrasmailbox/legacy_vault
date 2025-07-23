@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-
 class AutoLockSettingsWidget extends StatelessWidget {
   final int interval;
   final bool screenCaptureProtection;
@@ -39,8 +38,8 @@ class AutoLockSettingsWidget extends StatelessWidget {
                 Text(
                   'Auto-Lock & Protection',
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ],
             ),
@@ -66,12 +65,13 @@ class AutoLockSettingsWidget extends StatelessWidget {
               trailing: DropdownButton<int>(
                 value: interval,
                 underline: const SizedBox(),
-                items: [0, 1, 2, 5, 10, 30].map((int value) {
-                  return DropdownMenuItem<int>(
-                    value: value,
-                    child: Text(value == 0 ? 'Immediate' : '${value}min'),
-                  );
-                }).toList(),
+                items:
+                    [0, 1, 2, 5, 10, 30].map((int value) {
+                      return DropdownMenuItem<int>(
+                        value: value,
+                        child: Text(value == 0 ? 'Immediate' : '${value}min'),
+                      );
+                    }).toList(),
                 onChanged: (int? newValue) {
                   if (newValue != null) {
                     onIntervalChanged(newValue);
@@ -164,8 +164,8 @@ class AutoLockSettingsWidget extends StatelessWidget {
                       Text(
                         'Security Implications',
                         style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                              fontWeight: FontWeight.w600,
-                            ),
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ],
                   ),
@@ -202,7 +202,11 @@ class AutoLockSettingsWidget extends StatelessWidget {
   }
 
   Widget _buildImplicationItem(
-      BuildContext context, String title, String description, String severity) {
+    BuildContext context,
+    String title,
+    String description,
+    String severity,
+  ) {
     Color severityColor;
     IconData severityIcon;
 
@@ -229,11 +233,7 @@ class AutoLockSettingsWidget extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(
-            severityIcon,
-            size: 14.sp,
-            color: severityColor,
-          ),
+          Icon(severityIcon, size: 14.sp, color: severityColor),
           SizedBox(width: 2.w),
           Expanded(
             child: Column(
@@ -242,14 +242,11 @@ class AutoLockSettingsWidget extends StatelessWidget {
                 Text(
                   title,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        fontWeight: FontWeight.w500,
-                        color: severityColor,
-                      ),
+                    fontWeight: FontWeight.w500,
+                    color: severityColor,
+                  ),
                 ),
-                Text(
-                  description,
-                  style: Theme.of(context).textTheme.bodySmall,
-                ),
+                Text(description, style: Theme.of(context).textTheme.bodySmall),
               ],
             ),
           ),

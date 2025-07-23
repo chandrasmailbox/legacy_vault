@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-
 class AuthenticationSettingsWidget extends StatelessWidget {
   final bool biometricEnabled;
   final int sessionTimeout;
@@ -37,8 +36,8 @@ class AuthenticationSettingsWidget extends StatelessWidget {
                 Text(
                   'Authentication',
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ],
             ),
@@ -112,17 +111,19 @@ class AuthenticationSettingsWidget extends StatelessWidget {
                 ),
               ),
               title: const Text('Session Timeout'),
-              subtitle:
-                  Text('Auto-lock after $sessionTimeout minutes of inactivity'),
+              subtitle: Text(
+                'Auto-lock after $sessionTimeout minutes of inactivity',
+              ),
               trailing: DropdownButton<int>(
                 value: sessionTimeout,
                 underline: const SizedBox(),
-                items: [1, 5, 15, 30, 60].map((int value) {
-                  return DropdownMenuItem<int>(
-                    value: value,
-                    child: Text('${value}min'),
-                  );
-                }).toList(),
+                items:
+                    [1, 5, 15, 30, 60].map((int value) {
+                      return DropdownMenuItem<int>(
+                        value: value,
+                        child: Text('${value}min'),
+                      );
+                    }).toList(),
                 onChanged: (int? newValue) {
                   if (newValue != null) {
                     onSessionTimeoutChanged(newValue);

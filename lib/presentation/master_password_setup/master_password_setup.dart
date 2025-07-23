@@ -82,10 +82,9 @@ class _MasterPasswordSetupState extends State<MasterPasswordSetup> {
               Container(
                 padding: EdgeInsets.all(6.w),
                 decoration: BoxDecoration(
-                  color: Theme.of(context)
-                      .colorScheme
-                      .primaryContainer
-                      .withAlpha(26),
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.primaryContainer.withAlpha(26),
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
                     color: Theme.of(context).colorScheme.primary.withAlpha(77),
@@ -103,10 +102,8 @@ class _MasterPasswordSetupState extends State<MasterPasswordSetup> {
                       _isExistingUser
                           ? 'Update Your Master Password'
                           : 'Secure Your Digital Legacy',
-                      style:
-                          Theme.of(context).textTheme.headlineSmall?.copyWith(
-                                fontWeight: FontWeight.w600,
-                              ),
+                      style: Theme.of(context).textTheme.headlineSmall
+                          ?.copyWith(fontWeight: FontWeight.w600),
                       textAlign: TextAlign.center,
                     ),
                     SizedBox(height: 2.w),
@@ -133,10 +130,8 @@ class _MasterPasswordSetupState extends State<MasterPasswordSetup> {
                       children: [
                         Text(
                           'Current Master Password',
-                          style:
-                              Theme.of(context).textTheme.titleMedium?.copyWith(
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                          style: Theme.of(context).textTheme.titleMedium
+                              ?.copyWith(fontWeight: FontWeight.w600),
                         ),
                         SizedBox(height: 3.w),
                         TextFormField(
@@ -203,9 +198,7 @@ class _MasterPasswordSetupState extends State<MasterPasswordSetup> {
               SizedBox(height: 4.w),
 
               // Password Requirements
-              PasswordRequirementsWidget(
-                password: _passwordController.text,
-              ),
+              PasswordRequirementsWidget(password: _passwordController.text),
 
               SizedBox(height: 6.w),
 
@@ -226,13 +219,12 @@ class _MasterPasswordSetupState extends State<MasterPasswordSetup> {
                           SizedBox(width: 2.w),
                           Text(
                             'Master Password Tips',
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium
-                                ?.copyWith(
-                                  fontWeight: FontWeight.w600,
-                                  color: Theme.of(context).colorScheme.tertiary,
-                                ),
+                            style: Theme.of(
+                              context,
+                            ).textTheme.titleMedium?.copyWith(
+                              fontWeight: FontWeight.w600,
+                              color: Theme.of(context).colorScheme.tertiary,
+                            ),
                           ),
                         ],
                       ),
@@ -255,9 +247,10 @@ class _MasterPasswordSetupState extends State<MasterPasswordSetup> {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: _passwordStrength >= 0.6
-                          ? () => _setMasterPassword()
-                          : null,
+                      onPressed:
+                          _passwordStrength >= 0.6
+                              ? () => _setMasterPassword()
+                              : null,
                       child: Text(
                         _isExistingUser
                             ? 'Update Master Password'
@@ -302,10 +295,7 @@ class _MasterPasswordSetupState extends State<MasterPasswordSetup> {
           ),
           SizedBox(width: 3.w),
           Expanded(
-            child: Text(
-              tip,
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
+            child: Text(tip, style: Theme.of(context).textTheme.bodyMedium),
           ),
         ],
       ),
@@ -385,7 +375,7 @@ class _MasterPasswordSetupState extends State<MasterPasswordSetup> {
       'Forest',
       'Garden',
       'Bridge',
-      'Castle'
+      'Castle',
     ];
     final random = DateTime.now().millisecondsSinceEpoch;
 
@@ -398,55 +388,56 @@ class _MasterPasswordSetupState extends State<MasterPasswordSetup> {
 
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Generated Password Suggestion'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text('Here\'s a strong password suggestion:'),
-            const SizedBox(height: 16),
-            Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.surface,
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(
-                  color: Theme.of(context).colorScheme.outline,
+      builder:
+          (context) => AlertDialog(
+            title: const Text('Generated Password Suggestion'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text('Here\'s a strong password suggestion:'),
+                const SizedBox(height: 16),
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.surface,
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(
+                      color: Theme.of(context).colorScheme.outline,
+                    ),
+                  ),
+                  child: SelectableText(
+                    suggestion,
+                    style: const TextStyle(
+                      fontFamily: 'monospace',
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
-              ),
-              child: SelectableText(
-                suggestion,
-                style: const TextStyle(
-                  fontFamily: 'monospace',
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
+                const SizedBox(height: 16),
+                const Text(
+                  'Make sure to memorize this password or store it securely. You\'ll need it to access your vault.',
+                  style: TextStyle(fontSize: 12),
                 ),
+              ],
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('Cancel'),
               ),
-            ),
-            const SizedBox(height: 16),
-            const Text(
-              'Make sure to memorize this password or store it securely. You\'ll need it to access your vault.',
-              style: TextStyle(fontSize: 12),
-            ),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
+              ElevatedButton(
+                onPressed: () {
+                  _passwordController.text = suggestion;
+                  _confirmPasswordController.text = suggestion;
+                  _evaluatePasswordStrength();
+                  Navigator.pop(context);
+                },
+                child: const Text('Use This Password'),
+              ),
+            ],
           ),
-          ElevatedButton(
-            onPressed: () {
-              _passwordController.text = suggestion;
-              _confirmPasswordController.text = suggestion;
-              _evaluatePasswordStrength();
-              Navigator.pop(context);
-            },
-            child: const Text('Use This Password'),
-          ),
-        ],
-      ),
     );
   }
 
@@ -468,8 +459,9 @@ class _MasterPasswordSetupState extends State<MasterPasswordSetup> {
     if (_passwordStrength < 0.6) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content:
-              Text('Password is too weak. Please choose a stronger password.'),
+          content: Text(
+            'Password is too weak. Please choose a stronger password.',
+          ),
           backgroundColor: Colors.orange,
         ),
       );
@@ -479,29 +471,34 @@ class _MasterPasswordSetupState extends State<MasterPasswordSetup> {
     // Show confirmation dialog
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: Text(_isExistingUser
-            ? 'Confirm Password Change'
-            : 'Confirm Master Password'),
-        content: Text(
-          _isExistingUser
-              ? 'Are you sure you want to change your master password? You\'ll need to use the new password for all future vault access.'
-              : 'Are you sure you want to set this as your master password? Make sure you can remember it - there\'s no way to recover it if forgotten.',
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
+      builder:
+          (context) => AlertDialog(
+            title: Text(
+              _isExistingUser
+                  ? 'Confirm Password Change'
+                  : 'Confirm Master Password',
+            ),
+            content: Text(
+              _isExistingUser
+                  ? 'Are you sure you want to change your master password? You\'ll need to use the new password for all future vault access.'
+                  : 'Are you sure you want to set this as your master password? Make sure you can remember it - there\'s no way to recover it if forgotten.',
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('Cancel'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  _saveMasterPassword();
+                },
+                child: Text(
+                  _isExistingUser ? 'Change Password' : 'Set Password',
+                ),
+              ),
+            ],
           ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-              _saveMasterPassword();
-            },
-            child: Text(_isExistingUser ? 'Change Password' : 'Set Password'),
-          ),
-        ],
-      ),
     );
   }
 

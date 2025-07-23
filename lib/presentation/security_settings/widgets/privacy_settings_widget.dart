@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-
 class PrivacySettingsWidget extends StatelessWidget {
   final bool dataCollection;
   final bool crashReporting;
@@ -35,8 +34,8 @@ class PrivacySettingsWidget extends StatelessWidget {
                 Text(
                   'Privacy Settings',
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ],
             ),
@@ -104,10 +103,9 @@ class PrivacySettingsWidget extends StatelessWidget {
             Container(
               padding: EdgeInsets.all(3.w),
               decoration: BoxDecoration(
-                color: Theme.of(context)
-                    .colorScheme
-                    .primaryContainer
-                    .withAlpha(26),
+                color: Theme.of(
+                  context,
+                ).colorScheme.primaryContainer.withAlpha(26),
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(
                   color: Theme.of(context).colorScheme.primary.withAlpha(77),
@@ -127,9 +125,9 @@ class PrivacySettingsWidget extends StatelessWidget {
                       Text(
                         'Privacy Commitment',
                         style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                              color: Theme.of(context).colorScheme.primary,
-                              fontWeight: FontWeight.w600,
-                            ),
+                          color: Theme.of(context).colorScheme.primary,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ],
                   ),
@@ -169,13 +167,12 @@ class PrivacySettingsWidget extends StatelessWidget {
                         SizedBox(width: 2.w),
                         Text(
                           'Read Full Privacy Policy',
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodySmall
-                              ?.copyWith(
-                                color: Theme.of(context).colorScheme.primary,
-                                decoration: TextDecoration.underline,
-                              ),
+                          style: Theme.of(
+                            context,
+                          ).textTheme.bodySmall?.copyWith(
+                            color: Theme.of(context).colorScheme.primary,
+                            decoration: TextDecoration.underline,
+                          ),
                         ),
                       ],
                     ),
@@ -190,7 +187,10 @@ class PrivacySettingsWidget extends StatelessWidget {
   }
 
   Widget _buildPrivacyPoint(
-      BuildContext context, String title, String description) {
+    BuildContext context,
+    String title,
+    String description,
+  ) {
     return Padding(
       padding: EdgeInsets.only(bottom: 2.w),
       child: Row(
@@ -208,19 +208,17 @@ class PrivacySettingsWidget extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        fontWeight: FontWeight.w500,
-                      ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w500),
                 ),
                 Text(
                   description,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Theme.of(context)
-                            .textTheme
-                            .bodySmall
-                            ?.color
-                            ?.withAlpha(179),
-                      ),
+                    color: Theme.of(
+                      context,
+                    ).textTheme.bodySmall?.color?.withAlpha(179),
+                  ),
                 ),
               ],
             ),
@@ -233,30 +231,31 @@ class PrivacySettingsWidget extends StatelessWidget {
   void _showPrivacyPolicy(BuildContext context) {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Privacy Policy'),
-        content: const SingleChildScrollView(
-          child: Text(
-            'Your privacy is our top priority. This app uses zero-knowledge encryption, meaning we cannot access your vault data even if we wanted to.\n\n'
-            'When analytics are enabled, we only collect anonymous usage statistics to improve the app experience. No personal information or vault contents are ever transmitted.\n\n'
-            'Crash reports help us identify and fix issues quickly, but they never contain your sensitive data.\n\n'
-            'For complete details, visit our website or contact support.',
+      builder:
+          (context) => AlertDialog(
+            title: const Text('Privacy Policy'),
+            content: const SingleChildScrollView(
+              child: Text(
+                'Your privacy is our top priority. This app uses zero-knowledge encryption, meaning we cannot access your vault data even if we wanted to.\n\n'
+                'When analytics are enabled, we only collect anonymous usage statistics to improve the app experience. No personal information or vault contents are ever transmitted.\n\n'
+                'Crash reports help us identify and fix issues quickly, but they never contain your sensitive data.\n\n'
+                'For complete details, visit our website or contact support.',
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('Close'),
+              ),
+              TextButton(
+                onPressed: () {
+                  // TODO: Open privacy policy in browser
+                  Navigator.pop(context);
+                },
+                child: const Text('View Full Policy'),
+              ),
+            ],
           ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Close'),
-          ),
-          TextButton(
-            onPressed: () {
-              // TODO: Open privacy policy in browser
-              Navigator.pop(context);
-            },
-            child: const Text('View Full Policy'),
-          ),
-        ],
-      ),
     );
   }
 }

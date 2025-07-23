@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../theme/app_theme.dart';
+import '../../../widgets/custom_icon_widget.dart';
 
 class InheritanceTimelineWidget extends StatelessWidget {
   final String currentStatus;
@@ -132,8 +134,9 @@ class InheritanceTimelineWidget extends StatelessWidget {
     } else if (isActive) {
       stepColor = AppTheme.lightTheme.colorScheme.primary;
     } else {
-      stepColor =
-          AppTheme.lightTheme.colorScheme.onSurfaceVariant.withAlpha(128);
+      stepColor = AppTheme.lightTheme.colorScheme.onSurfaceVariant.withAlpha(
+        128,
+      );
     }
 
     return IntrinsicHeight(

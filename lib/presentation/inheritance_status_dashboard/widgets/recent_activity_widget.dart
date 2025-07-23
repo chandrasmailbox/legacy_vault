@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../theme/app_theme.dart';
+import '../../../widgets/custom_icon_widget.dart';
 
 class RecentActivityWidget extends StatelessWidget {
   final List<Map<String, dynamic>> activities;
@@ -39,10 +41,7 @@ class RecentActivityWidget extends StatelessWidget {
                 ),
               ),
               const Spacer(),
-              TextButton(
-                onPressed: onViewAll,
-                child: const Text('View All'),
-              ),
+              TextButton(onPressed: onViewAll, child: const Text('View All')),
             ],
           ),
           SizedBox(height: 2.h),
@@ -50,9 +49,10 @@ class RecentActivityWidget extends StatelessWidget {
             _buildEmptyState()
           else
             Column(
-              children: activities.map((activity) {
-                return _buildActivityItem(activity);
-              }).toList(),
+              children:
+                  activities.map((activity) {
+                    return _buildActivityItem(activity);
+                  }).toList(),
             ),
         ],
       ),
@@ -66,8 +66,9 @@ class RecentActivityWidget extends StatelessWidget {
         children: [
           CustomIconWidget(
             iconName: 'history',
-            color:
-                AppTheme.lightTheme.colorScheme.onSurfaceVariant.withAlpha(128),
+            color: AppTheme.lightTheme.colorScheme.onSurfaceVariant.withAlpha(
+              128,
+            ),
             size: 48,
           ),
           SizedBox(height: 2.h),

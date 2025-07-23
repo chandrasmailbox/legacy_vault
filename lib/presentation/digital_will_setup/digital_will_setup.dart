@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../core/app_export.dart';
+import '../../theme/app_theme.dart';
+import '../../widgets/custom_icon_widget.dart';
 import './widgets/check_in_interval_widget.dart';
 import './widgets/emergency_contact_widget.dart';
 import './widgets/family_member_card_widget.dart';
@@ -52,7 +54,7 @@ class _DigitalWillSetupState extends State<DigitalWillSetup> {
       "email": "emma.johnson@email.com",
       "phone": "+1 (555) 345-6789",
       "isEmergencyContact": false,
-    }
+    },
   ];
 
   @override
@@ -209,23 +211,24 @@ class _DigitalWillSetupState extends State<DigitalWillSetup> {
         ),
         backgroundColor: AppTheme.lightTheme.colorScheme.surface,
         elevation: 0,
-        leading: _currentStep > 0
-            ? IconButton(
-                onPressed: _previousStep,
-                icon: CustomIconWidget(
-                  iconName: 'arrow_back',
-                  color: AppTheme.lightTheme.colorScheme.onSurface,
-                  size: 24,
+        leading:
+            _currentStep > 0
+                ? IconButton(
+                  onPressed: _previousStep,
+                  icon: CustomIconWidget(
+                    iconName: 'arrow_back',
+                    color: AppTheme.lightTheme.colorScheme.onSurface,
+                    size: 24,
+                  ),
+                )
+                : IconButton(
+                  onPressed: () => Navigator.pop(context),
+                  icon: CustomIconWidget(
+                    iconName: 'close',
+                    color: AppTheme.lightTheme.colorScheme.onSurface,
+                    size: 24,
+                  ),
                 ),
-              )
-            : IconButton(
-                onPressed: () => Navigator.pop(context),
-                icon: CustomIconWidget(
-                  iconName: 'close',
-                  color: AppTheme.lightTheme.colorScheme.onSurface,
-                  size: 24,
-                ),
-              ),
       ),
       body: Column(
         children: [
@@ -279,8 +282,9 @@ class _DigitalWillSetupState extends State<DigitalWillSetup> {
               color: AppTheme.lightTheme.colorScheme.surface,
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
-                color: AppTheme.lightTheme.colorScheme.outline
-                    .withValues(alpha: 0.2),
+                color: AppTheme.lightTheme.colorScheme.outline.withValues(
+                  alpha: 0.2,
+                ),
               ),
             ),
             child: Column(
@@ -296,10 +300,8 @@ class _DigitalWillSetupState extends State<DigitalWillSetup> {
                     SizedBox(width: 3.w),
                     Text(
                       'Secure Offline Inheritance',
-                      style:
-                          AppTheme.lightTheme.textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
+                      style: AppTheme.lightTheme.textTheme.titleMedium
+                          ?.copyWith(fontWeight: FontWeight.w600),
                     ),
                   ],
                 ),
@@ -380,10 +382,7 @@ class _DigitalWillSetupState extends State<DigitalWillSetup> {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              Text(
-                description,
-                style: AppTheme.lightTheme.textTheme.bodySmall,
-              ),
+              Text(description, style: AppTheme.lightTheme.textTheme.bodySmall),
             ],
           ),
         ),
@@ -501,49 +500,51 @@ class _DigitalWillSetupState extends State<DigitalWillSetup> {
           // Family members list
           _familyMembers.isEmpty
               ? Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.all(4.w),
-                  decoration: BoxDecoration(
-                    color: AppTheme.lightTheme.colorScheme.surface,
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                      color: AppTheme.lightTheme.colorScheme.outline
-                          .withValues(alpha: 0.2),
+                width: double.infinity,
+                padding: EdgeInsets.all(4.w),
+                decoration: BoxDecoration(
+                  color: AppTheme.lightTheme.colorScheme.surface,
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(
+                    color: AppTheme.lightTheme.colorScheme.outline.withValues(
+                      alpha: 0.2,
                     ),
                   ),
-                  child: Column(
-                    children: [
-                      CustomIconWidget(
-                        iconName: 'family_restroom',
-                        color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
-                        size: 48,
-                      ),
-                      SizedBox(height: 2.h),
-                      Text(
-                        'No family members added yet',
-                        style: AppTheme.lightTheme.textTheme.titleMedium,
-                      ),
-                      SizedBox(height: 1.h),
-                      Text(
-                        'Add at least one family member to continue',
-                        style: AppTheme.lightTheme.textTheme.bodySmall,
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-                  ),
-                )
-              : Column(
-                  children: _familyMembers.map((member) {
-                    return FamilyMemberCardWidget(
-                      member: member,
-                      onRemove: () =>
-                          _removeFamilyMember(member["id"] as String),
-                      onEdit: () {
-                        // Handle edit functionality
-                      },
-                    );
-                  }).toList(),
                 ),
+                child: Column(
+                  children: [
+                    CustomIconWidget(
+                      iconName: 'family_restroom',
+                      color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
+                      size: 48,
+                    ),
+                    SizedBox(height: 2.h),
+                    Text(
+                      'No family members added yet',
+                      style: AppTheme.lightTheme.textTheme.titleMedium,
+                    ),
+                    SizedBox(height: 1.h),
+                    Text(
+                      'Add at least one family member to continue',
+                      style: AppTheme.lightTheme.textTheme.bodySmall,
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              )
+              : Column(
+                children:
+                    _familyMembers.map((member) {
+                      return FamilyMemberCardWidget(
+                        member: member,
+                        onRemove:
+                            () => _removeFamilyMember(member["id"] as String),
+                        onEdit: () {
+                          // Handle edit functionality
+                        },
+                      );
+                    }).toList(),
+              ),
 
           SizedBox(height: 4.h),
 
@@ -682,42 +683,42 @@ class _DigitalWillSetupState extends State<DigitalWillSetup> {
               Expanded(
                 child: ElevatedButton(
                   onPressed: _isSetupComplete ? null : _completeSetup,
-                  style:
-                      AppTheme.lightTheme.elevatedButtonTheme.style?.copyWith(
-                    backgroundColor: WidgetStateProperty.all(
-                      _isSetupComplete
-                          ? AppTheme.successLight
-                          : AppTheme.lightTheme.colorScheme.primary,
-                    ),
-                  ),
+                  style: AppTheme.lightTheme.elevatedButtonTheme.style
+                      ?.copyWith(
+                        backgroundColor: WidgetStateProperty.all(
+                          _isSetupComplete
+                              ? AppTheme.successLight
+                              : AppTheme.lightTheme.colorScheme.primary,
+                        ),
+                      ),
                   child: Padding(
                     padding: EdgeInsets.symmetric(vertical: 1.h),
-                    child: _isSetupComplete
-                        ? Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              CustomIconWidget(
-                                iconName: 'check',
-                                color: Colors.white,
-                                size: 20,
-                              ),
-                              SizedBox(width: 2.w),
-                              Text(
-                                'Setup Complete',
-                                style: AppTheme.lightTheme.textTheme.labelLarge
-                                    ?.copyWith(
+                    child:
+                        _isSetupComplete
+                            ? Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                CustomIconWidget(
+                                  iconName: 'check',
                                   color: Colors.white,
+                                  size: 20,
                                 ),
-                              ),
-                            ],
-                          )
-                        : Text(
-                            'Complete Setup',
-                            style: AppTheme.lightTheme.textTheme.labelLarge
-                                ?.copyWith(
-                              color: Colors.white,
+                                SizedBox(width: 2.w),
+                                Text(
+                                  'Setup Complete',
+                                  style: AppTheme
+                                      .lightTheme
+                                      .textTheme
+                                      .labelLarge
+                                      ?.copyWith(color: Colors.white),
+                                ),
+                              ],
+                            )
+                            : Text(
+                              'Complete Setup',
+                              style: AppTheme.lightTheme.textTheme.labelLarge
+                                  ?.copyWith(color: Colors.white),
                             ),
-                          ),
                   ),
                 ),
               ),

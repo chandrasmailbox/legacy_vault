@@ -5,14 +5,13 @@ import 'package:flutter/services.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../theme/app_theme.dart';
+import '../../../widgets/custom_icon_widget.dart';
 
 class PasswordGeneratorWidget extends StatefulWidget {
   final Function(String) onPasswordGenerated;
 
-  const PasswordGeneratorWidget({
-    super.key,
-    required this.onPasswordGenerated,
-  });
+  const PasswordGeneratorWidget({super.key, required this.onPasswordGenerated});
 
   @override
   State<PasswordGeneratorWidget> createState() =>
@@ -118,8 +117,9 @@ class _PasswordGeneratorWidgetState extends State<PasswordGeneratorWidget> {
             height: 0.5.h,
             margin: EdgeInsets.symmetric(vertical: 1.h),
             decoration: BoxDecoration(
-              color: AppTheme.lightTheme.colorScheme.onSurfaceVariant
-                  .withAlpha(77),
+              color: AppTheme.lightTheme.colorScheme.onSurfaceVariant.withAlpha(
+                77,
+              ),
               borderRadius: BorderRadius.circular(2),
             ),
           ),
@@ -297,12 +297,13 @@ class _PasswordGeneratorWidgetState extends State<PasswordGeneratorWidget> {
 
                   // Use password button
                   ElevatedButton(
-                    onPressed: _generatedPassword.isNotEmpty
-                        ? () {
-                            widget.onPasswordGenerated(_generatedPassword);
-                            Navigator.pop(context);
-                          }
-                        : null,
+                    onPressed:
+                        _generatedPassword.isNotEmpty
+                            ? () {
+                              widget.onPasswordGenerated(_generatedPassword);
+                              Navigator.pop(context);
+                            }
+                            : null,
                     style: ElevatedButton.styleFrom(
                       minimumSize: Size(double.infinity, 6.h),
                     ),

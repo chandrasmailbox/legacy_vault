@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-
 class PasswordStrengthWidget extends StatelessWidget {
   final double strength;
   final String strengthText;
@@ -28,15 +27,15 @@ class PasswordStrengthWidget extends StatelessWidget {
                 Text(
                   'Password Strength',
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
                 Text(
                   strengthText,
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        color: strengthColor,
-                        fontWeight: FontWeight.w600,
-                      ),
+                    color: strengthColor,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ],
             ),
@@ -75,18 +74,14 @@ class PasswordStrengthWidget extends StatelessWidget {
             SizedBox(height: 2.w),
             Row(
               children: [
-                Icon(
-                  _getStrengthIcon(),
-                  size: 16.sp,
-                  color: strengthColor,
-                ),
+                Icon(_getStrengthIcon(), size: 16.sp, color: strengthColor),
                 SizedBox(width: 2.w),
                 Expanded(
                   child: Text(
                     _getStrengthDescription(),
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: strengthColor,
-                        ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodySmall?.copyWith(color: strengthColor),
                   ),
                 ),
               ],

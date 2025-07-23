@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../theme/app_theme.dart';
+import '../../../widgets/custom_icon_widget.dart';
 
 class SetupProgressWidget extends StatelessWidget {
   final int currentStep;
@@ -22,8 +24,9 @@ class SetupProgressWidget extends StatelessWidget {
         color: AppTheme.lightTheme.colorScheme.surface,
         boxShadow: [
           BoxShadow(
-            color:
-                AppTheme.lightTheme.colorScheme.shadow.withValues(alpha: 0.1),
+            color: AppTheme.lightTheme.colorScheme.shadow.withValues(
+              alpha: 0.1,
+            ),
             blurRadius: 4,
             offset: const Offset(0, 2),
           ),
@@ -46,36 +49,45 @@ class SetupProgressWidget extends StatelessWidget {
                       height: 8.w,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: isCompleted || isCurrent
-                            ? AppTheme.lightTheme.colorScheme.primary
-                            : AppTheme.lightTheme.colorScheme.outline
-                                .withValues(alpha: 0.3),
+                        color:
+                            isCompleted || isCurrent
+                                ? AppTheme.lightTheme.colorScheme.primary
+                                : AppTheme.lightTheme.colorScheme.outline
+                                    .withValues(alpha: 0.3),
                         border: Border.all(
-                          color: isCompleted || isCurrent
-                              ? AppTheme.lightTheme.colorScheme.primary
-                              : AppTheme.lightTheme.colorScheme.outline
-                                  .withValues(alpha: 0.3),
+                          color:
+                              isCompleted || isCurrent
+                                  ? AppTheme.lightTheme.colorScheme.primary
+                                  : AppTheme.lightTheme.colorScheme.outline
+                                      .withValues(alpha: 0.3),
                           width: 2,
                         ),
                       ),
                       child: Center(
-                        child: isCompleted
-                            ? CustomIconWidget(
-                                iconName: 'check',
-                                color: Colors.white,
-                                size: 16,
-                              )
-                            : Text(
-                                '${index + 1}',
-                                style: AppTheme.lightTheme.textTheme.labelSmall
-                                    ?.copyWith(
-                                  color: isCurrent
-                                      ? Colors.white
-                                      : AppTheme.lightTheme.colorScheme
-                                          .onSurfaceVariant,
-                                  fontWeight: FontWeight.w600,
+                        child:
+                            isCompleted
+                                ? CustomIconWidget(
+                                  iconName: 'check',
+                                  color: Colors.white,
+                                  size: 16,
+                                )
+                                : Text(
+                                  '${index + 1}',
+                                  style: AppTheme
+                                      .lightTheme
+                                      .textTheme
+                                      .labelSmall
+                                      ?.copyWith(
+                                        color:
+                                            isCurrent
+                                                ? Colors.white
+                                                : AppTheme
+                                                    .lightTheme
+                                                    .colorScheme
+                                                    .onSurfaceVariant,
+                                        fontWeight: FontWeight.w600,
+                                      ),
                                 ),
-                              ),
                       ),
                     ),
 
@@ -86,10 +98,11 @@ class SetupProgressWidget extends StatelessWidget {
                           height: 2,
                           margin: EdgeInsets.symmetric(horizontal: 2.w),
                           decoration: BoxDecoration(
-                            color: isCompleted
-                                ? AppTheme.lightTheme.colorScheme.primary
-                                : AppTheme.lightTheme.colorScheme.outline
-                                    .withValues(alpha: 0.3),
+                            color:
+                                isCompleted
+                                    ? AppTheme.lightTheme.colorScheme.primary
+                                    : AppTheme.lightTheme.colorScheme.outline
+                                        .withValues(alpha: 0.3),
                             borderRadius: BorderRadius.circular(1),
                           ),
                         ),
@@ -109,9 +122,10 @@ class SetupProgressWidget extends StatelessWidget {
                 child: Text(
                   'Introduction',
                   style: AppTheme.lightTheme.textTheme.labelSmall?.copyWith(
-                    color: currentStep >= 0
-                        ? AppTheme.lightTheme.colorScheme.primary
-                        : AppTheme.lightTheme.colorScheme.onSurfaceVariant,
+                    color:
+                        currentStep >= 0
+                            ? AppTheme.lightTheme.colorScheme.primary
+                            : AppTheme.lightTheme.colorScheme.onSurfaceVariant,
                     fontWeight:
                         currentStep == 0 ? FontWeight.w600 : FontWeight.w400,
                   ),
@@ -122,9 +136,10 @@ class SetupProgressWidget extends StatelessWidget {
                 child: Text(
                   'Check-ins',
                   style: AppTheme.lightTheme.textTheme.labelSmall?.copyWith(
-                    color: currentStep >= 1
-                        ? AppTheme.lightTheme.colorScheme.primary
-                        : AppTheme.lightTheme.colorScheme.onSurfaceVariant,
+                    color:
+                        currentStep >= 1
+                            ? AppTheme.lightTheme.colorScheme.primary
+                            : AppTheme.lightTheme.colorScheme.onSurfaceVariant,
                     fontWeight:
                         currentStep == 1 ? FontWeight.w600 : FontWeight.w400,
                   ),
@@ -135,9 +150,10 @@ class SetupProgressWidget extends StatelessWidget {
                 child: Text(
                   'Family',
                   style: AppTheme.lightTheme.textTheme.labelSmall?.copyWith(
-                    color: currentStep >= 2
-                        ? AppTheme.lightTheme.colorScheme.primary
-                        : AppTheme.lightTheme.colorScheme.onSurfaceVariant,
+                    color:
+                        currentStep >= 2
+                            ? AppTheme.lightTheme.colorScheme.primary
+                            : AppTheme.lightTheme.colorScheme.onSurfaceVariant,
                     fontWeight:
                         currentStep == 2 ? FontWeight.w600 : FontWeight.w400,
                   ),
@@ -148,9 +164,10 @@ class SetupProgressWidget extends StatelessWidget {
                 child: Text(
                   'Complete',
                   style: AppTheme.lightTheme.textTheme.labelSmall?.copyWith(
-                    color: currentStep >= 3
-                        ? AppTheme.lightTheme.colorScheme.primary
-                        : AppTheme.lightTheme.colorScheme.onSurfaceVariant,
+                    color:
+                        currentStep >= 3
+                            ? AppTheme.lightTheme.colorScheme.primary
+                            : AppTheme.lightTheme.colorScheme.onSurfaceVariant,
                     fontWeight:
                         currentStep == 3 ? FontWeight.w600 : FontWeight.w400,
                   ),
@@ -165,8 +182,9 @@ class SetupProgressWidget extends StatelessWidget {
           // Progress percentage
           LinearProgressIndicator(
             value: (currentStep + 1) / totalSteps,
-            backgroundColor:
-                AppTheme.lightTheme.colorScheme.outline.withValues(alpha: 0.2),
+            backgroundColor: AppTheme.lightTheme.colorScheme.outline.withValues(
+              alpha: 0.2,
+            ),
             valueColor: AlwaysStoppedAnimation<Color>(
               AppTheme.lightTheme.colorScheme.primary,
             ),

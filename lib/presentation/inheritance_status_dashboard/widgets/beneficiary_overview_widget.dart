@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../theme/app_theme.dart';
+import '../../../widgets/custom_icon_widget.dart';
 
 class BeneficiaryOverviewWidget extends StatelessWidget {
   final List<Map<String, dynamic>> beneficiaries;
@@ -42,10 +44,7 @@ class BeneficiaryOverviewWidget extends StatelessWidget {
                 ),
               ),
               const Spacer(),
-              TextButton(
-                onPressed: onViewAll,
-                child: const Text('View All'),
-              ),
+              TextButton(onPressed: onViewAll, child: const Text('View All')),
             ],
           ),
           SizedBox(height: 2.h),
@@ -53,9 +52,10 @@ class BeneficiaryOverviewWidget extends StatelessWidget {
             _buildEmptyState()
           else
             Column(
-              children: beneficiaries.take(3).map((beneficiary) {
-                return _buildBeneficiaryCard(context, beneficiary);
-              }).toList(),
+              children:
+                  beneficiaries.take(3).map((beneficiary) {
+                    return _buildBeneficiaryCard(context, beneficiary);
+                  }).toList(),
             ),
         ],
       ),
@@ -69,8 +69,9 @@ class BeneficiaryOverviewWidget extends StatelessWidget {
         children: [
           CustomIconWidget(
             iconName: 'person_add',
-            color:
-                AppTheme.lightTheme.colorScheme.onSurfaceVariant.withAlpha(128),
+            color: AppTheme.lightTheme.colorScheme.onSurfaceVariant.withAlpha(
+              128,
+            ),
             size: 48,
           ),
           SizedBox(height: 2.h),
@@ -91,7 +92,9 @@ class BeneficiaryOverviewWidget extends StatelessWidget {
   }
 
   Widget _buildBeneficiaryCard(
-      BuildContext context, Map<String, dynamic> beneficiary) {
+    BuildContext context,
+    Map<String, dynamic> beneficiary,
+  ) {
     final isVerified = beneficiary["verificationStatus"] == "Verified";
 
     return Container(
@@ -115,34 +118,36 @@ class BeneficiaryOverviewWidget extends StatelessWidget {
                   width: 12.w,
                   height: 12.w,
                   fit: BoxFit.cover,
-                  placeholder: (context, url) => Container(
-                    width: 12.w,
-                    height: 12.w,
-                    decoration: BoxDecoration(
-                      color:
-                          AppTheme.lightTheme.colorScheme.primary.withAlpha(26),
-                      shape: BoxShape.circle,
-                    ),
-                    child: CustomIconWidget(
-                      iconName: 'person',
-                      color: AppTheme.lightTheme.colorScheme.primary,
-                      size: 24,
-                    ),
-                  ),
-                  errorWidget: (context, url, error) => Container(
-                    width: 12.w,
-                    height: 12.w,
-                    decoration: BoxDecoration(
-                      color:
-                          AppTheme.lightTheme.colorScheme.primary.withAlpha(26),
-                      shape: BoxShape.circle,
-                    ),
-                    child: CustomIconWidget(
-                      iconName: 'person',
-                      color: AppTheme.lightTheme.colorScheme.primary,
-                      size: 24,
-                    ),
-                  ),
+                  placeholder:
+                      (context, url) => Container(
+                        width: 12.w,
+                        height: 12.w,
+                        decoration: BoxDecoration(
+                          color: AppTheme.lightTheme.colorScheme.primary
+                              .withAlpha(26),
+                          shape: BoxShape.circle,
+                        ),
+                        child: CustomIconWidget(
+                          iconName: 'person',
+                          color: AppTheme.lightTheme.colorScheme.primary,
+                          size: 24,
+                        ),
+                      ),
+                  errorWidget:
+                      (context, url, error) => Container(
+                        width: 12.w,
+                        height: 12.w,
+                        decoration: BoxDecoration(
+                          color: AppTheme.lightTheme.colorScheme.primary
+                              .withAlpha(26),
+                          shape: BoxShape.circle,
+                        ),
+                        child: CustomIconWidget(
+                          iconName: 'person',
+                          color: AppTheme.lightTheme.colorScheme.primary,
+                          size: 24,
+                        ),
+                      ),
                 ),
               ),
               SizedBox(width: 3.w),
@@ -155,9 +160,7 @@ class BeneficiaryOverviewWidget extends StatelessWidget {
                         Text(
                           beneficiary["name"],
                           style: AppTheme.lightTheme.textTheme.titleSmall
-                              ?.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
+                              ?.copyWith(fontWeight: FontWeight.bold),
                         ),
                         SizedBox(width: 2.w),
                         if (isVerified)

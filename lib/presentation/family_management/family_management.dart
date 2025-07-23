@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../core/app_export.dart';
+import '../../theme/app_theme.dart';
+import '../../widgets/custom_icon_widget.dart';
 import './widgets/family_member_card_widget.dart';
 import './widgets/filter_chips_widget.dart';
 import './widgets/inheritance_stats_widget.dart';
@@ -34,7 +36,7 @@ class _FamilyManagementState extends State<FamilyManagement>
       "inheritedItems": 45,
       "lastContact": "2025-07-10",
       "contactVerified": true,
-      "emergencyContact": false
+      "emergencyContact": false,
     },
     {
       "id": 2,
@@ -49,7 +51,7 @@ class _FamilyManagementState extends State<FamilyManagement>
       "inheritedItems": 12,
       "lastContact": "2025-07-08",
       "contactVerified": true,
-      "emergencyContact": false
+      "emergencyContact": false,
     },
     {
       "id": 3,
@@ -64,7 +66,7 @@ class _FamilyManagementState extends State<FamilyManagement>
       "inheritedItems": 8,
       "lastContact": "2025-06-25",
       "contactVerified": false,
-      "emergencyContact": false
+      "emergencyContact": false,
     },
     {
       "id": 4,
@@ -79,7 +81,7 @@ class _FamilyManagementState extends State<FamilyManagement>
       "inheritedItems": 0,
       "lastContact": "2025-07-05",
       "contactVerified": true,
-      "emergencyContact": true
+      "emergencyContact": true,
     },
     {
       "id": 5,
@@ -94,15 +96,15 @@ class _FamilyManagementState extends State<FamilyManagement>
       "inheritedItems": 0,
       "lastContact": "2025-06-15",
       "contactVerified": false,
-      "emergencyContact": true
-    }
+      "emergencyContact": true,
+    },
   ];
 
   final List<String> _filterOptions = [
     'All Members',
     'Active Inheritors',
     'Emergency Contacts',
-    'Verification Needed'
+    'Verification Needed',
   ];
 
   @override
@@ -123,32 +125,40 @@ class _FamilyManagementState extends State<FamilyManagement>
 
     // Apply search filter
     if (_searchQuery.isNotEmpty) {
-      filtered = filtered.where((member) {
-        final name = (member['name'] as String).toLowerCase();
-        final relationship = (member['relationship'] as String).toLowerCase();
-        final query = _searchQuery.toLowerCase();
-        return name.contains(query) || relationship.contains(query);
-      }).toList();
+      filtered =
+          filtered.where((member) {
+            final name = (member['name'] as String).toLowerCase();
+            final relationship =
+                (member['relationship'] as String).toLowerCase();
+            final query = _searchQuery.toLowerCase();
+            return name.contains(query) || relationship.contains(query);
+          }).toList();
     }
 
     // Apply category filter
     switch (_selectedFilter) {
       case 'Active Inheritors':
-        filtered = filtered
-            .where((member) =>
-                (member['accessLevel'] as String) != 'Emergency Contact Only' &&
-                (member['status'] as String) == 'active')
-            .toList();
+        filtered =
+            filtered
+                .where(
+                  (member) =>
+                      (member['accessLevel'] as String) !=
+                          'Emergency Contact Only' &&
+                      (member['status'] as String) == 'active',
+                )
+                .toList();
         break;
       case 'Emergency Contacts':
-        filtered = filtered
-            .where((member) => (member['emergencyContact'] as bool) == true)
-            .toList();
+        filtered =
+            filtered
+                .where((member) => (member['emergencyContact'] as bool) == true)
+                .toList();
         break;
       case 'Verification Needed':
-        filtered = filtered
-            .where((member) => (member['contactVerified'] as bool) == false)
-            .toList();
+        filtered =
+            filtered
+                .where((member) => (member['contactVerified'] as bool) == false)
+                .toList();
         break;
     }
 
@@ -157,14 +167,18 @@ class _FamilyManagementState extends State<FamilyManagement>
 
   int get _totalInheritedItems {
     return _familyMembers.fold(
-        0, (sum, member) => sum + (member['inheritedItems'] as int));
+      0,
+      (sum, member) => sum + (member['inheritedItems'] as int),
+    );
   }
 
   int get _activeInheritors {
     return _familyMembers
-        .where((member) =>
-            (member['accessLevel'] as String) != 'Emergency Contact Only' &&
-            (member['status'] as String) == 'active')
+        .where(
+          (member) =>
+              (member['accessLevel'] as String) != 'Emergency Contact Only' &&
+              (member['status'] as String) == 'active',
+        )
         .length;
   }
 
@@ -321,7 +335,8 @@ class _FamilyManagementState extends State<FamilyManagement>
         return AlertDialog(
           title: Text('Send Test Notifications'),
           content: Text(
-              'This will send test notifications to all family members to verify their contact information. Continue?'),
+            'This will send test notifications to all family members to verify their contact information. Continue?',
+          ),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
@@ -333,7 +348,8 @@ class _FamilyManagementState extends State<FamilyManagement>
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text(
-                        'Test notifications sent to ${_familyMembers.length} members'),
+                      'Test notifications sent to ${_familyMembers.length} members',
+                    ),
                     backgroundColor: AppTheme.successLight,
                   ),
                 );
@@ -441,17 +457,18 @@ class _FamilyManagementState extends State<FamilyManagement>
           Container(), // Check-in placeholder
         ],
       ),
-      floatingActionButton: _tabController.index == 1
-          ? FloatingActionButton.extended(
-              onPressed: _showAddFamilyMemberDialog,
-              icon: CustomIconWidget(
-                iconName: 'person_add',
-                color: Colors.white,
-                size: 24,
-              ),
-              label: Text('Add Family Member'),
-            )
-          : null,
+      floatingActionButton:
+          _tabController.index == 1
+              ? FloatingActionButton.extended(
+                onPressed: _showAddFamilyMemberDialog,
+                icon: CustomIconWidget(
+                  iconName: 'person_add',
+                  color: Colors.white,
+                  size: 24,
+                ),
+                label: Text('Add Family Member'),
+              )
+              : null,
     );
   }
 
@@ -481,21 +498,23 @@ class _FamilyManagementState extends State<FamilyManagement>
                 color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
                 size: 20,
               ),
-              suffixIcon: _searchQuery.isNotEmpty
-                  ? IconButton(
-                      icon: CustomIconWidget(
-                        iconName: 'clear',
-                        color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
-                        size: 20,
-                      ),
-                      onPressed: () {
-                        _searchController.clear();
-                        setState(() {
-                          _searchQuery = '';
-                        });
-                      },
-                    )
-                  : null,
+              suffixIcon:
+                  _searchQuery.isNotEmpty
+                      ? IconButton(
+                        icon: CustomIconWidget(
+                          iconName: 'clear',
+                          color:
+                              AppTheme.lightTheme.colorScheme.onSurfaceVariant,
+                          size: 20,
+                        ),
+                        onPressed: () {
+                          _searchController.clear();
+                          setState(() {
+                            _searchQuery = '';
+                          });
+                        },
+                      )
+                      : null,
             ),
             onChanged: (value) {
               setState(() {
@@ -525,25 +544,26 @@ class _FamilyManagementState extends State<FamilyManagement>
 
         // Family members list
         Expanded(
-          child: _filteredMembers.isEmpty
-              ? _buildEmptyState()
-              : ListView.builder(
-                  padding: EdgeInsets.symmetric(horizontal: 4.w),
-                  itemCount: _filteredMembers.length,
-                  itemBuilder: (context, index) {
-                    final member = _filteredMembers[index];
-                    return FamilyMemberCardWidget(
-                      member: member,
-                      onEdit: () => _editMember(member),
-                      onTestContact: () => _testContact(member),
-                      onRemove: () => _removeMember(member),
-                      onViewInheritedItems: () => _viewInheritedItems(member),
-                      onSendTestAlert: () => _sendTestAlert(member),
-                      onModifyAccess: () => _modifyAccess(member),
-                      onChangeRelationship: () => _changeRelationship(member),
-                    );
-                  },
-                ),
+          child:
+              _filteredMembers.isEmpty
+                  ? _buildEmptyState()
+                  : ListView.builder(
+                    padding: EdgeInsets.symmetric(horizontal: 4.w),
+                    itemCount: _filteredMembers.length,
+                    itemBuilder: (context, index) {
+                      final member = _filteredMembers[index];
+                      return FamilyMemberCardWidget(
+                        member: member,
+                        onEdit: () => _editMember(member),
+                        onTestContact: () => _testContact(member),
+                        onRemove: () => _removeMember(member),
+                        onViewInheritedItems: () => _viewInheritedItems(member),
+                        onSendTestAlert: () => _sendTestAlert(member),
+                        onModifyAccess: () => _modifyAccess(member),
+                        onChangeRelationship: () => _changeRelationship(member),
+                      );
+                    },
+                  ),
         ),
 
         // Bottom section with next notification info
@@ -679,7 +699,8 @@ class _FamilyManagementState extends State<FamilyManagement>
         return AlertDialog(
           title: Text('Remove Family Member'),
           content: Text(
-              'Are you sure you want to remove ${member['name']} from your family list? This action cannot be undone.'),
+            'Are you sure you want to remove ${member['name']} from your family list? This action cannot be undone.',
+          ),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),

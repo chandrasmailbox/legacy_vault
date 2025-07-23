@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../theme/app_theme.dart';
+import '../../../widgets/custom_icon_widget.dart';
 
 class BiometricExplanationWidget extends StatelessWidget {
   final String biometricType;
@@ -22,8 +24,9 @@ class BiometricExplanationWidget extends StatelessWidget {
           isSetupComplete ? _getSuccessDescription() : _getSetupDescription(),
           style: AppTheme.lightTheme.textTheme.bodyLarge?.copyWith(
             height: 1.5,
-            color: AppTheme.lightTheme.colorScheme.onSurface
-                .withValues(alpha: 0.8),
+            color: AppTheme.lightTheme.colorScheme.onSurface.withValues(
+              alpha: 0.8,
+            ),
           ),
           textAlign: TextAlign.center,
         ),
@@ -36,12 +39,14 @@ class BiometricExplanationWidget extends StatelessWidget {
             width: double.infinity,
             padding: EdgeInsets.all(4.w),
             decoration: BoxDecoration(
-              color: AppTheme.lightTheme.colorScheme.primary
-                  .withValues(alpha: 0.05),
+              color: AppTheme.lightTheme.colorScheme.primary.withValues(
+                alpha: 0.05,
+              ),
               borderRadius: BorderRadius.circular(8),
               border: Border.all(
-                color: AppTheme.lightTheme.colorScheme.primary
-                    .withValues(alpha: 0.1),
+                color: AppTheme.lightTheme.colorScheme.primary.withValues(
+                  alpha: 0.1,
+                ),
               ),
             ),
             child: Column(
@@ -55,8 +60,9 @@ class BiometricExplanationWidget extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 2.h),
-                ..._getBenefitsList()
-                    .map((benefit) => _buildBenefitItem(benefit)),
+                ..._getBenefitsList().map(
+                  (benefit) => _buildBenefitItem(benefit),
+                ),
               ],
             ),
           ),
@@ -65,12 +71,14 @@ class BiometricExplanationWidget extends StatelessWidget {
             width: double.infinity,
             padding: EdgeInsets.all(4.w),
             decoration: BoxDecoration(
-              color: AppTheme.lightTheme.colorScheme.primary
-                  .withValues(alpha: 0.05),
+              color: AppTheme.lightTheme.colorScheme.primary.withValues(
+                alpha: 0.05,
+              ),
               borderRadius: BorderRadius.circular(8),
               border: Border.all(
-                color: AppTheme.lightTheme.colorScheme.primary
-                    .withValues(alpha: 0.1),
+                color: AppTheme.lightTheme.colorScheme.primary.withValues(
+                  alpha: 0.1,
+                ),
               ),
             ),
             child: Column(

@@ -5,6 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../theme/app_theme.dart';
+import '../../../widgets/custom_icon_widget.dart';
 
 class PasswordGeneratorBottomSheet extends StatefulWidget {
   final Function(String) onPasswordGenerated;
@@ -53,7 +55,7 @@ class _PasswordGeneratorBottomSheetState
     'zebra',
     'amber',
     'beach',
-    'coral'
+    'coral',
   ];
 
   @override
@@ -86,8 +88,10 @@ class _PasswordGeneratorBottomSheetState
     if (chars.isEmpty) return '';
 
     Random random = Random.secure();
-    return List.generate(_passwordLength.toInt(),
-        (index) => chars[random.nextInt(chars.length)]).join();
+    return List.generate(
+      _passwordLength.toInt(),
+      (index) => chars[random.nextInt(chars.length)],
+    ).join();
   }
 
   String _generatePronounceablePassword() {
@@ -164,8 +168,9 @@ class _PasswordGeneratorBottomSheetState
             width: 12.w,
             height: 0.5.h,
             decoration: BoxDecoration(
-              color: AppTheme.lightTheme.colorScheme.outline
-                  .withValues(alpha: 0.3),
+              color: AppTheme.lightTheme.colorScheme.outline.withValues(
+                alpha: 0.3,
+              ),
               borderRadius: BorderRadius.circular(2),
             ),
           ),
@@ -228,20 +233,20 @@ class _PasswordGeneratorBottomSheetState
                               child: Text(
                                 'Generated Password',
                                 style: AppTheme.lightTheme.textTheme.titleMedium
-                                    ?.copyWith(
-                                  fontWeight: FontWeight.w600,
-                                ),
+                                    ?.copyWith(fontWeight: FontWeight.w600),
                               ),
                             ),
                             IconButton(
                               onPressed: () {
                                 Clipboard.setData(
-                                    ClipboardData(text: _generatedPassword));
+                                  ClipboardData(text: _generatedPassword),
+                                );
                                 HapticFeedback.lightImpact();
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
-                                    content:
-                                        Text('Password copied to clipboard'),
+                                    content: Text(
+                                      'Password copied to clipboard',
+                                    ),
                                     duration: Duration(seconds: 2),
                                   ),
                                 );
@@ -290,10 +295,13 @@ class _PasswordGeneratorBottomSheetState
                               child: LinearProgressIndicator(
                                 value: _calculatePasswordStrength() / 6,
                                 backgroundColor: AppTheme
-                                    .lightTheme.colorScheme.outline
+                                    .lightTheme
+                                    .colorScheme
+                                    .outline
                                     .withValues(alpha: 0.3),
                                 valueColor: AlwaysStoppedAnimation<Color>(
-                                    _getPasswordStrengthColor()),
+                                  _getPasswordStrengthColor(),
+                                ),
                                 minHeight: 1.h,
                               ),
                             ),
@@ -302,9 +310,9 @@ class _PasswordGeneratorBottomSheetState
                               _getPasswordStrengthText(),
                               style: AppTheme.lightTheme.textTheme.bodyMedium
                                   ?.copyWith(
-                                color: _getPasswordStrengthColor(),
-                                fontWeight: FontWeight.w600,
-                              ),
+                                    color: _getPasswordStrengthColor(),
+                                    fontWeight: FontWeight.w600,
+                                  ),
                             ),
                           ],
                         ),
@@ -342,7 +350,9 @@ class _PasswordGeneratorBottomSheetState
                       Container(
                         width: 12.w,
                         padding: EdgeInsets.symmetric(
-                            vertical: 1.h, horizontal: 2.w),
+                          vertical: 1.h,
+                          horizontal: 2.w,
+                        ),
                         decoration: BoxDecoration(
                           color: AppTheme.lightTheme.colorScheme.primary
                               .withValues(alpha: 0.1),
@@ -353,9 +363,9 @@ class _PasswordGeneratorBottomSheetState
                           textAlign: TextAlign.center,
                           style: AppTheme.lightTheme.textTheme.bodyMedium
                               ?.copyWith(
-                            fontWeight: FontWeight.w600,
-                            color: AppTheme.lightTheme.colorScheme.primary,
-                          ),
+                                fontWeight: FontWeight.w600,
+                                color: AppTheme.lightTheme.colorScheme.primary,
+                              ),
                         ),
                       ),
                     ],
@@ -393,27 +403,21 @@ class _PasswordGeneratorBottomSheetState
                     },
                   ),
 
-                  _buildOptionTile(
-                    'Numbers (0-9)',
-                    _includeNumbers,
-                    (value) {
-                      setState(() {
-                        _includeNumbers = value;
-                      });
-                      _generatePassword();
-                    },
-                  ),
+                  _buildOptionTile('Numbers (0-9)', _includeNumbers, (value) {
+                    setState(() {
+                      _includeNumbers = value;
+                    });
+                    _generatePassword();
+                  }),
 
-                  _buildOptionTile(
-                    'Symbols (!@#\$%^&*)',
-                    _includeSymbols,
-                    (value) {
-                      setState(() {
-                        _includeSymbols = value;
-                      });
-                      _generatePassword();
-                    },
-                  ),
+                  _buildOptionTile('Symbols (!@#\$%^&*)', _includeSymbols, (
+                    value,
+                  ) {
+                    setState(() {
+                      _includeSymbols = value;
+                    });
+                    _generatePassword();
+                  }),
 
                   _buildOptionTile(
                     'Pronounceable',
@@ -440,8 +444,9 @@ class _PasswordGeneratorBottomSheetState
               color: AppTheme.lightTheme.colorScheme.surface,
               border: Border(
                 top: BorderSide(
-                  color: AppTheme.lightTheme.colorScheme.outline
-                      .withValues(alpha: 0.2),
+                  color: AppTheme.lightTheme.colorScheme.outline.withValues(
+                    alpha: 0.2,
+                  ),
                 ),
               ),
             ),
@@ -488,8 +493,12 @@ class _PasswordGeneratorBottomSheetState
     );
   }
 
-  Widget _buildOptionTile(String title, bool value, Function(bool) onChanged,
-      {String? subtitle}) {
+  Widget _buildOptionTile(
+    String title,
+    bool value,
+    Function(bool) onChanged, {
+    String? subtitle,
+  }) {
     return Container(
       margin: EdgeInsets.only(bottom: 2.h),
       decoration: BoxDecoration(
@@ -506,15 +515,17 @@ class _PasswordGeneratorBottomSheetState
             fontWeight: FontWeight.w500,
           ),
         ),
-        subtitle: subtitle != null
-            ? Text(
-                subtitle,
-                style: AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
-                  color: AppTheme.lightTheme.colorScheme.onSurface
-                      .withValues(alpha: 0.7),
-                ),
-              )
-            : null,
+        subtitle:
+            subtitle != null
+                ? Text(
+                  subtitle,
+                  style: AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
+                    color: AppTheme.lightTheme.colorScheme.onSurface.withValues(
+                      alpha: 0.7,
+                    ),
+                  ),
+                )
+                : null,
         value: value,
         onChanged: onChanged,
         contentPadding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.h),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-
 class MasterPasswordFormWidget extends StatelessWidget {
   final TextEditingController passwordController;
   final TextEditingController confirmPasswordController;
@@ -30,9 +29,9 @@ class MasterPasswordFormWidget extends StatelessWidget {
           children: [
             Text(
               'New Master Password',
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w600,
-                  ),
+              style: Theme.of(
+                context,
+              ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
             ),
             SizedBox(height: 3.w),
 
@@ -96,8 +95,9 @@ class MasterPasswordFormWidget extends StatelessWidget {
             Container(
               padding: EdgeInsets.all(3.w),
               decoration: BoxDecoration(
-                color:
-                    Theme.of(context).colorScheme.errorContainer.withAlpha(26),
+                color: Theme.of(
+                  context,
+                ).colorScheme.errorContainer.withAlpha(26),
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(
                   color: Theme.of(context).colorScheme.error.withAlpha(77),
@@ -118,19 +118,21 @@ class MasterPasswordFormWidget extends StatelessWidget {
                       children: [
                         Text(
                           'Important Notice',
-                          style:
-                              Theme.of(context).textTheme.titleSmall?.copyWith(
-                                    color: Theme.of(context).colorScheme.error,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                          style: Theme.of(
+                            context,
+                          ).textTheme.titleSmall?.copyWith(
+                            color: Theme.of(context).colorScheme.error,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                         SizedBox(height: 1.w),
                         Text(
                           'Your master password cannot be recovered if forgotten. Make sure to choose something you\'ll remember or store it securely.',
-                          style:
-                              Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    color: Theme.of(context).colorScheme.error,
-                                  ),
+                          style: Theme.of(
+                            context,
+                          ).textTheme.bodySmall?.copyWith(
+                            color: Theme.of(context).colorScheme.error,
+                          ),
                         ),
                       ],
                     ),

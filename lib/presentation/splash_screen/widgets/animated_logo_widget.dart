@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-
 class AnimatedLogoWidget extends StatefulWidget {
   final Animation<double> fadeAnimation;
   final Animation<double> scaleAnimation;
@@ -29,13 +28,9 @@ class _AnimatedLogoWidgetState extends State<AnimatedLogoWidget>
       vsync: this,
     );
 
-    _rotationAnimation = Tween<double>(
-      begin: 0.0,
-      end: 0.5,
-    ).animate(CurvedAnimation(
-      parent: _rotationController,
-      curve: Curves.easeInOut,
-    ));
+    _rotationAnimation = Tween<double>(begin: 0.0, end: 0.5).animate(
+      CurvedAnimation(parent: _rotationController, curve: Curves.easeInOut),
+    );
 
     // Start rotation animation with delay
     Future.delayed(const Duration(milliseconds: 800), () {
